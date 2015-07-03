@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace biz.dfch.CS.System.Utilities
 {
-    class FileReader
+    public class FileReader
     {
         const uint GENERIC_READ = 0x80000000;
         const uint OPEN_EXISTING = 3;
