@@ -6,7 +6,6 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace biz.dfch.CS.System.Utilities
 {
@@ -94,10 +93,10 @@ namespace biz.dfch.CS.System.Utilities
 
         public static Dictionary<string, string> OutputParameter = new Dictionary<string, string>();
 
-        private static object ReadStandardOutputThreadCompleted = false;
+        private static object readStandardOutputThreadCompleted = false;
         private static void ReadStandardOutputThread(object data)
         {
-            lock (ReadStandardOutputThreadCompleted)
+            lock (readStandardOutputThreadCompleted)
             {
                 IntPtr handle = (IntPtr)data;
 
@@ -105,15 +104,15 @@ namespace biz.dfch.CS.System.Utilities
                 int bytesRead;
                 var sb = new StringBuilder();
 
-                dynamic ConsoleEncoding;
-                ConsoleEncoding = new System.Text.ASCIIEncoding();
+                dynamic consoleEncoding;
+                consoleEncoding = new ASCIIEncoding();
                 var readerStdout = new FileReader(handle);
                 sb.Clear();
                 bytesRead = 0;
                 do
                 {
                     bytesRead = readerStdout.Read(buffer, 0, buffer.Length);
-                    string content = ConsoleEncoding.GetString(buffer, 0, bytesRead);
+                    string content = consoleEncoding.GetString(buffer, 0, bytesRead);
                     sb.Append(content);
                 }
                 while (bytesRead > 0);
@@ -122,17 +121,17 @@ namespace biz.dfch.CS.System.Utilities
                 {
                     OutputParameter[ResultDictionaryNameEnum.STDOUT.ToString()] = sb.ToString();
                 }
-                ReadStandardOutputThreadCompleted = true;
+                readStandardOutputThreadCompleted = true;
                 return;
             }
         }
 
-        public static Dictionary<string, string> StartProcess(string CommandLine, string WorkingDirectory, NetworkCredential Credential)
+        public static Dictionary<string, string> StartProcess(string commandLine, string workingDirectory, NetworkCredential credential)
         {
-            return StartProcess(CommandLine, WorkingDirectory, Credential.Domain, Credential.UserName, Credential.Password);
+            return StartProcess(commandLine, workingDirectory, credential.Domain, credential.UserName, credential.Password);
         }
 
-        public static Dictionary<string, string> StartProcess(string CommandLine, string WorkingDirectory, string Domain, string Username, string Password)
+        public static Dictionary<string, string> StartProcess(string commandLine, string workingDirectory, string domain, string username, string password)
         {
             var fReturn = false;
 
@@ -184,18 +183,18 @@ namespace biz.dfch.CS.System.Utilities
                 startInfo.hStdOutput = hConsoleOutputWrite;
                 startInfo.dwFlags = 0x00000100; // STARTF_USESTDHANDLES
 
-                Debug.WriteLine(string.Format("SystemUtilities.Process.StartProcess: '{0}' in '{1}' [as '{2}\\{3}] ...", CommandLine, WorkingDirectory, Domain, Username, Password));
+                Debug.WriteLine(string.Format("SystemUtilities.Process.StartProcess: '{0}' in '{1}' [as '{2}\\{3}] ...", commandLine, workingDirectory, domain, username, password));
                 // Create process
                 fReturn = CreateProcessWithLogonW(
-                    Username,
-                    Domain,
-                    Password,
+                    username,
+                    domain,
+                    password,
                     0,
                     null,
-                    CommandLine,
+                    commandLine,
                     0,
                     IntPtr.Zero,
-                    WorkingDirectory,
+                    workingDirectory,
                     ref startInfo,
                     out processInfo
                 );
@@ -215,8 +214,8 @@ namespace biz.dfch.CS.System.Utilities
                 int bytesRead;
                 var sb = new StringBuilder();
 
-                dynamic ConsoleEncoding;
-                ConsoleEncoding = new System.Text.ASCIIEncoding();
+                dynamic consoleEncoding;
+                consoleEncoding = new ASCIIEncoding();
 
                 Thread threadOutput = new Thread(Process.ReadStandardOutputThread);
                 threadOutput.Start(hConsoleOutputRead);
@@ -227,7 +226,7 @@ namespace biz.dfch.CS.System.Utilities
                 do
                 {
                     bytesRead = readerStderr.Read(buffer, 0, buffer.Length);
-                    string content = ConsoleEncoding.GetString(buffer, 0, bytesRead);
+                    string content = consoleEncoding.GetString(buffer, 0, bytesRead);
                     sb.Append(content);
                 }
                 while (bytesRead > 0);
@@ -237,9 +236,9 @@ namespace biz.dfch.CS.System.Utilities
                     OutputParameter["STDERR"] = sb.ToString();
                 }
 
-                lock (ReadStandardOutputThreadCompleted)
+                lock (readStandardOutputThreadCompleted)
                 {
-                    Debug.WriteLine("ReadStandardOutputThreadCompleted '{0}'", ReadStandardOutputThreadCompleted);
+                    Debug.WriteLine("ReadStandardOutputThreadCompleted '{0}'", readStandardOutputThreadCompleted);
                 }
 
                 // This read is no longer used here but implemented in a separate thread

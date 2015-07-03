@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SystemUtilities")]
-[assembly: AssemblyDescription("Start-Process launcher")]
+[assembly: AssemblyDescription("CS System Utilities")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("d-fens GmbH")]
 [assembly: AssemblyProduct("SystemUtilities")]
-[assembly: AssemblyCopyright("Copyright ©  2014 d-fens GmbH, Ronald Rink")]
+[assembly: AssemblyCopyright("Copyright ©  2014-2015 d-fens GmbH, Ronald Rink")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
