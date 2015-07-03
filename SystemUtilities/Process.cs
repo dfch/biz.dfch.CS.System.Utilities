@@ -7,9 +7,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using SystemUtilities;
 
-namespace SystemUtilities
+namespace biz.dfch.CS.System.Utilities
 {
     public class Process
     {
