@@ -1,7 +1,7 @@
 biz.dfch.CS.System.Utilities
 ============================
 
-Assembly: SystemUtilities.dll
+Assembly: biz.dfch.CS.System.Utilities.dll
 
 d-fens GmbH, General-Guisan-Strasse 6, CH-6300 Zug, Switzerland
 
