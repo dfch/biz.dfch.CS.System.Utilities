@@ -70,7 +70,7 @@ namespace biz.dfch.CS.System.Utilities
                 case "GET":
                 case "HEAD":
                     // synchronous request without the need for .ContinueWith() or await
-                    response = httpClient.GetAsync(Uri).Result;
+                    response = _httpClient.GetAsync(Uri).Result;
                     break;
                 case "POST":
                     {
@@ -80,7 +80,7 @@ namespace biz.dfch.CS.System.Utilities
                         // optional: add a formatter option to it as well
                         _Body.Headers.ContentType = new MediaTypeHeaderValue(_ContentType);
                         // synchronous request without the need for .ContinueWith() or await
-                        response = httpClient.PostAsync(Uri, _Body).Result;
+                        response = _httpClient.PostAsync(Uri, _Body).Result;
                     }
                     break;
                 case "PUT":
@@ -91,11 +91,11 @@ namespace biz.dfch.CS.System.Utilities
                         // optional: add a formatter option to it as well
                         _Body.Headers.ContentType = new MediaTypeHeaderValue(_ContentType);
                         // synchronous request without the need for .ContinueWith() or await
-                        response = httpClient.PutAsync(Uri, _Body).Result;
+                        response = _httpClient.PutAsync(Uri, _Body).Result;
                     }
                     break;
                 case "DELETE":
-                    response = httpClient.DeleteAsync(Uri).Result;
+                    response = _httpClient.DeleteAsync(Uri).Result;
                     break;
                 default:
                     throw new NotImplementedException();
