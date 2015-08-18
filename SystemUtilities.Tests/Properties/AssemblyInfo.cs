@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SystemUtilities.Tests")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("biz.dfch.CS.System.Utilities.Tests")]
+[assembly: AssemblyDescription("Tests for CSharp System Utilities")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("d-fens GmbH")]
 [assembly: AssemblyProduct("SystemUtilities.Tests")]
