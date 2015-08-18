@@ -29,7 +29,7 @@ namespace biz.dfch.CS.System.Utilities
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public RestHelper()
+        public RestCallExecutor()
         {
             _httpClient = new HttpClient();
         }
@@ -38,7 +38,7 @@ namespace biz.dfch.CS.System.Utilities
         /// Extended Constructor to set credentials of HttpClient
         /// </summary>
         /// <param name="credentials"></param>
-        public RestHelper(ICredentials credentials)
+        public RestCallExecutor(ICredentials credentials)
         {
             var clientHandler = new HttpClientHandler();
             clientHandler.Credentials = credentials;
@@ -46,18 +46,18 @@ namespace biz.dfch.CS.System.Utilities
         }
 
         // DFTODO pass headers
-        public String Invoke(String Method, String Uri, String Body, Dictionary<String> headers = new Di )
+        public String Invoke(String Method, String Uri, String Body)
         {
             _httpClient.BaseAddress = new Uri(Uri);
             int _TimeoutSec = 90;
             _httpClient.Timeout = new TimeSpan(0, 0, _TimeoutSec);
             string _ContentType = "application/json";
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_ContentType));
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_ContentType));
             var _CredentialBase64 = "RWRnYXJTY2huaXR0ZW5maXR0aWNoOlJvY2taeno=";
-            httpClient.DefaultRequestHeaders.Add("Authorization", String.Format("Basic {0}", _CredentialBase64));
+            _httpClient.DefaultRequestHeaders.Add("Authorization", String.Format("Basic {0}", _CredentialBase64));
             var _UserAgent = "d-fens HttpClient";
             // You can actually also set the User-Agent via a built-in property
-            httpClient.DefaultRequestHeaders.Add("User-Agent", _UserAgent);
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", _UserAgent);
             // You get the following exception when trying to set the "Content-Type" header like this:
             // cl.DefaultRequestHeaders.Add("Content-Type", _ContentType);
             // "Misused header name. Make sure request headers are used with HttpRequestMessage, response headers with HttpResponseMessage, and content headers with HttpContent objects."
