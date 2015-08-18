@@ -198,7 +198,7 @@ namespace biz.dfch.CS.System.Utilities
                 startInfo.hStdOutput = hConsoleOutputWrite;
                 startInfo.dwFlags = 0x00000100; // STARTF_USESTDHANDLES
 
-                Debug.WriteLine(string.Format("SystemUtilities.Process.StartProcess: '{0}' in '{1}' [as '{2}\\{3}] ...", commandLine, workingDirectory, domain, username, password));
+                Debug.WriteLine(string.Format("SystemUtilities.Process.StartProcess: '{0}' in '{1}' [as '{2}\\{3}] ...", commandLine, workingDirectory, domain, username));
                 // Create process
                 fReturn = CreateProcessWithLogonW(
                     username,
