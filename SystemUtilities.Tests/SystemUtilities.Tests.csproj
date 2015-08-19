@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,7 +36,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MSTestExtensions">
+      <HintPath>..\packages\MSTestExtensions.4.0.0\lib\MSTestExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="Telerik.JustMock">
+      <HintPath>../JustMock/Telerik.JustMock.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -51,14 +58,20 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CollectionHelpersTest.cs" />
+    <Compile Include="Security\CryptographyTest.cs" />
+    <Compile Include="EnumUtilsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RestCallExecutorTest.cs" />
+    <Compile Include="Rest\RestCallExecutorTest.cs" />
+    <Compile Include="Attributes\StringValueAttributeExtensionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SystemUtilities\SystemUtilities.csproj">
       <Project>{606ad897-17b7-4012-8f0c-b66c7bc21f7d}</Project>
       <Name>SystemUtilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

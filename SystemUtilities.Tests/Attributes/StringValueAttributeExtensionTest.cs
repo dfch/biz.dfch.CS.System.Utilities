@@ -14,15 +14,20 @@
  * limitations under the License.
  */
 
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using biz.dfch.CS.System.Utilities.Attributes;
+using biz.dfch.CS.System.Utilities.Rest;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace biz.dfch.CS.System.Utilities.Tests
+namespace biz.dfch.CS.System.Utilities.Tests.Attributes
 {
-    public class RestCallExecutorTest
+    [TestClass]
+    public class StringValueAttributeExtensionTest
     {
+        [TestMethod]
+        public void GetStringValueForEnumWithStringValueAnnotationReturnsValueProvidedInAnnotation()
+        {
+            Assert.AreEqual("application/json", ContentType.ApplicationJson.GetStringValue());
+            Assert.AreEqual("application/xml", ContentType.ApplicationXml.GetStringValue());
+        }
     }
 }
