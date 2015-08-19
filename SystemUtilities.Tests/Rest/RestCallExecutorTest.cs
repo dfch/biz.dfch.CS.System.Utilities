@@ -40,11 +40,6 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
 
         private HttpClient _httpClient;
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext testContext)
-        {
-        }
-
         [TestInitialize]
         public void TestInitilize()
         {
