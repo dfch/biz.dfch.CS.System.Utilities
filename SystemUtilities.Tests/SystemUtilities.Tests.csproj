@@ -36,8 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MSTestExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MSTestExtensions">
       <HintPath>..\packages\MSTestExtensions.4.0.0\lib\MSTestExtensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
