@@ -47,18 +47,18 @@ namespace biz.dfch.CS.System.Utilities.Rest
             set { _ContentType = value; }
         }
 
-        private Boolean _EnsureSuccessCode;
-        public Boolean EnsureSuccessCode 
+        private Boolean _ensureSuccessStatusCode;
+        public Boolean EnsureSuccessStatusCode 
         {
-            get { return _EnsureSuccessCode; }
-            set { _EnsureSuccessCode = value; }
+            get { return _ensureSuccessStatusCode; }
+            set { _ensureSuccessStatusCode = value; }
         }
         #endregion
 
         #region Constructors
-        public RestCallExecutor(Boolean ensureSuccessCode = true)
+        public RestCallExecutor(Boolean ensureSuccessStatusCode = true)
         {
-            _EnsureSuccessCode = ensureSuccessCode;
+            _ensureSuccessStatusCode = ensureSuccessStatusCode;
             _ContentType = ContentType.ApplicationJson;
             _Timeout = DEFAULT_TIMEOUT;
         }
@@ -137,7 +137,7 @@ namespace biz.dfch.CS.System.Utilities.Rest
                     case HttpMethod.Put:
                         {
                             HttpContent content = new StringContent(body);
-                            content.Headers.ContentType = new MediaTypeHeaderValue(_ContentType.ToString());
+                            content.Headers.ContentType = new MediaTypeHeaderValue(_ContentType.GetStringValue());
                             response = httpClient.PutAsync(uri, content).Result;
                         }
                         break;
@@ -150,7 +150,7 @@ namespace biz.dfch.CS.System.Utilities.Rest
                                                                         method.GetStringValue()));
                 }
 
-                if (EnsureSuccessCode)
+                if (EnsureSuccessStatusCode)
                 {
                     response.EnsureSuccessStatusCode();
                 }
@@ -170,8 +170,9 @@ namespace biz.dfch.CS.System.Utilities.Rest
         {
             if (null != headers && headers.ContainsKey(USER_AGENT_HEADER_KEY))
             {
+                var userAgent = headers[USER_AGENT_HEADER_KEY];
                 headers.Remove(USER_AGENT_HEADER_KEY);
-                return headers[USER_AGENT_HEADER_KEY];
+                return userAgent;
             }
             return DEFAULT_USER_AGENT;
         }
