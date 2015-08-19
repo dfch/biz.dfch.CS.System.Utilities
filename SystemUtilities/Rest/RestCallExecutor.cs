@@ -33,8 +33,6 @@ namespace biz.dfch.CS.System.Utilities.Rest
         private const String CONTENT_TYPE_HEADER_KEY = "Content-Type";
         private const String USER_AGENT_HEADER_KEY = "User-Agent";
 
-        // DFTODO add credential support
-
         private int _Timeout;
         public int Timeout
         {
@@ -66,18 +64,36 @@ namespace biz.dfch.CS.System.Utilities.Rest
         }
         #endregion
 
+        /// <summary>
+        /// Executes a HTTP GET request to the passed uri
+        /// </summary>
+        /// <param name="uri">A valid URI</param>
+        /// <returns>The response body as String if succeded, otherwise an exception is thrown</returns>
         #region Invoke
         public String Invoke(String uri)
         {
             return Invoke(HttpMethod.Get, uri, null, null);
         }
 
+        /// <summary>
+        /// Executes a HTTP GET request to the passed uri and headers
+        /// </summary>
+        /// <param name="uri">A valid URI</param>
+        /// <param name="headers">A dictionary of headers (header key, header value)</param>
+        /// <returns>The response body as String if succeded, otherwise an exception is thrown</returns>
         public String Invoke(String uri, IDictionary<String, String> headers)
         {
             return Invoke(HttpMethod.Get, uri, headers, null);
         }
 
-        // DFTODO C# doc
+        /// <summary>
+        /// Executes a HTTP request based on the passed parameters
+        /// </summary>
+        /// <param name="method">HTTP Method (GET, PUT, POST, HEAD or DELETE)</param>
+        /// <param name="uri">A valid URI</param>
+        /// <param name="headers">A dictionary of headers (header key, header value)</param>
+        /// <param name="body">The payload formatted according the ContentType property (default = application/json)</param>
+        /// <returns>he response body as String if succeded, otherwise an exception is thrown</returns>
         public String Invoke(HttpMethod method, String uri, IDictionary<String, String> headers, String body)
         {
             ValidateUriParameter(uri);
@@ -143,6 +159,13 @@ namespace biz.dfch.CS.System.Utilities.Rest
             }
         }
 
+        /// <summary>
+        /// Extracts the 'User-Agent' header from the header parameters
+        /// and removes the value from the passed headers dictionary.
+        /// </summary>
+        /// <param name="headers"></param>
+        /// <returns>The user agent header value if present,
+        /// otherwise the default value 'RestCallExecutor'</returns>
         private String ExtractUserAgentFromHeaders(IDictionary<String, String> headers)
         {
             if (null != headers && headers.ContainsKey(USER_AGENT_HEADER_KEY))
@@ -152,12 +175,19 @@ namespace biz.dfch.CS.System.Utilities.Rest
             }
             return DEFAULT_USER_AGENT;
         }
-
         #endregion
 
+        /// <summary>
+        /// Checks if the 'uri' passed as string is a valid URI.
+        /// Throws an ArgumentException if uri is not valid.
+        /// </summary>
+        /// <param name="uri">Uri as string</param>
         private void ValidateUriParameter(String uri)
         {
-            if (String.IsNullOrWhiteSpace(uri)) throw new ArgumentException(String.Format("uri: Parameter validation FAILED. Parameter cannot be null or empty."), "uri");
+            if (String.IsNullOrWhiteSpace(uri))
+            {
+                throw new ArgumentException(String.Format("uri: Parameter validation FAILED. Parameter cannot be null or empty."), "uri");
+            }
         }
     }
 }
