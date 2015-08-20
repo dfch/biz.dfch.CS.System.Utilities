@@ -17,7 +17,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace biz.dfch.CS.System.Utilities
+namespace biz.dfch.CS.Utilities
 {
     public class FileReader
     {

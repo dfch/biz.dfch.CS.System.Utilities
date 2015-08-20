@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-using biz.dfch.CS.System.Utilities.Attributes;
-using biz.dfch.CS.System.Utilities.Rest;
+using biz.dfch.CS.Utilities.Attributes;
+using biz.dfch.CS.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace biz.dfch.CS.System.Utilities.Tests.Attributes
+namespace biz.dfch.CS.Utilities.Tests.Attributes
 {
     [TestClass]
     public class StringValueAttributeExtensionTest

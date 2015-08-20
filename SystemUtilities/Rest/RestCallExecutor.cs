@@ -19,9 +19,9 @@
 ﻿using System.Net;
 ﻿using System.Net.Http;
 ﻿using System.Net.Http.Headers;
-﻿using biz.dfch.CS.System.Utilities.Attributes;
+﻿using biz.dfch.CS.Utilities.Attributes;
 
-namespace biz.dfch.CS.System.Utilities.Rest
+namespace biz.dfch.CS.Utilities.Rest
 {
     /// <summary>
     /// Provides invoke methods to execute REST calls

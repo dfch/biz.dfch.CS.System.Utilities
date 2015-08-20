@@ -7,8 +7,8 @@
     <ProjectGuid>{606AD897-17B7-4012-8F0C-B66C7BC21F7D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>biz.dfch.CS.System.Utilities</RootNamespace>
-    <AssemblyName>biz.dfch.CS.System.Utilities</AssemblyName>
+    <RootNamespace>biz.dfch.CS.Utilities</RootNamespace>
+    <AssemblyName>biz.dfch.CS.Utilities</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 
-namespace biz.dfch.CS.System.Utilities
+namespace biz.dfch.CS.Utilities
 {
     public class Process
     {

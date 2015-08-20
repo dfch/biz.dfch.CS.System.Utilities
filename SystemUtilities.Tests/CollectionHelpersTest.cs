@@ -17,7 +17,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Specialized;
 
-namespace biz.dfch.CS.System.Utilities.Tests
+namespace biz.dfch.CS.Utilities.Tests
 {
     [TestClass]
     public class CollectionHelpersTests

@@ -6,8 +6,8 @@
     <ProjectGuid>{6F44E432-01DB-4A55-8C0E-886802F750AB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>biz.dfch.CS.System.Utilities.Tests</RootNamespace>
-    <AssemblyName>biz.dfch.CS.System.Utilities.Tests</AssemblyName>
+    <RootNamespace>biz.dfch.CS.Utilities.Tests</RootNamespace>
+    <AssemblyName>biz.dfch.CS.Utilities.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -67,13 +67,13 @@
     <Compile Include="Attributes\StringValueAttributeExtensionTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\SystemUtilities\SystemUtilities.csproj">
       <Project>{606ad897-17b7-4012-8f0c-b66c7bc21f7d}</Project>
       <Name>SystemUtilities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

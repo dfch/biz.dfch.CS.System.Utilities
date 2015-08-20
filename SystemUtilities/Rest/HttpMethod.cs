@@ -1,4 +1,3 @@
-using biz.dfch.CS.System.Utilities.Attributes;
 /**
  * Copyright 2015 Marc Rufer, d-fens GmbH
  *
@@ -14,13 +13,10 @@ using biz.dfch.CS.System.Utilities.Attributes;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace biz.dfch.CS.System.Utilities.Rest
+using biz.dfch.CS.Utilities.Attributes;
+
+namespace biz.dfch.CS.Utilities.Rest
 {
     public enum HttpMethod
     {

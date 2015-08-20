@@ -17,7 +17,7 @@
 using System.Collections.Specialized;
 using System.Linq;
 
-namespace biz.dfch.CS.System.Utilities
+namespace biz.dfch.CS.Utilities
 {
     public class CollectionHelpers
     {
