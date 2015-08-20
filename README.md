@@ -5,7 +5,13 @@ Assembly: biz.dfch.CS.System.Utilities.dll
 
 d-fens GmbH, General-Guisan-Strasse 6, CH-6300 Zug, Switzerland
 
-Start-Process assembly for invocation of processes via Interop/CreateProcessWithLogonW for use with biz.dfch.PS.System.Utilities
+Collection of utility classes that provide functionalities like
+
+* Invocation of RESTful requests (GET, HEAD, POST, PUT, DELETE)
+* StringValueAttribute for Enums
+* Cryptography helper for password encryption and decryption
+* Start-Process assembly for invocation of processes via Interop/CreateProcessWithLogonW for use with biz.dfch.PS.System.Utilities
+
 
 See http://d-fens.ch/2014/10/11/bug-start-job-from-scheduled-task-fails-with-event-id-8197-when-invoked-via-different-credential-set/
 
