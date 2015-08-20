@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net;
 using biz.dfch.CS.System.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net.Http;
@@ -354,6 +355,79 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
 
             Mock.Assert(_httpClient);
             Mock.Assert(mockedResponseMessage);
+        }
+
+        [TestMethod]
+        public void InvokeWithCredentialsExecutesRequestWithProvidedCredentials()
+        {
+            var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
+            var mockedCredentials = Mock.Create<ICredentials>();
+            var mockedHttpClientHandler = Mock.Create<HttpClientHandler>();
+
+            Mock.ArrangeSet(() => mockedHttpClientHandler.Credentials = Arg.Is(mockedCredentials))
+                .IgnoreInstance()
+                .OccursOnce();
+
+            Mock.Arrange(() => _httpClient.DefaultRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
+                .IgnoreInstance()
+                .OccursOnce();
+
+            Mock.Arrange(() => _httpClient.GetAsync(Arg.Is(new Uri(URI))).Result)
+                .IgnoreInstance()
+                .Returns(mockedResponseMessage)
+                .OccursOnce();
+
+            Mock.Arrange(() => mockedResponseMessage.EnsureSuccessStatusCode())
+                .IgnoreInstance()
+                .OccursOnce();
+
+            Mock.Arrange(() => mockedResponseMessage.Content.ReadAsStringAsync().Result)
+                .Returns(SAMPLE_RESPONSE_BODY)
+                .OccursOnce();
+
+            RestCallExecutor restCallExecutor = new RestCallExecutor();
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Get, URI, null, null, mockedCredentials));
+
+            Mock.Assert(_httpClient);
+            Mock.Assert(mockedResponseMessage);
+            Mock.Assert(mockedHttpClientHandler);
+        }
+
+        [TestMethod]
+        public void InvokeWithNullCredentialsExecutesRequestWithCredentialPropertyValue()
+        {
+            var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
+            var mockedCredentials = Mock.Create<ICredentials>();
+            var mockedHttpClientHandler = Mock.Create<HttpClientHandler>();
+
+            Mock.ArrangeSet(() => mockedHttpClientHandler.Credentials = Arg.Is(mockedCredentials))
+                .IgnoreInstance()
+                .OccursOnce();
+
+            Mock.Arrange(() => _httpClient.DefaultRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
+                .IgnoreInstance()
+                .OccursOnce();
+
+            Mock.Arrange(() => _httpClient.GetAsync(Arg.Is(new Uri(URI))).Result)
+                .IgnoreInstance()
+                .Returns(mockedResponseMessage)
+                .OccursOnce();
+
+            Mock.Arrange(() => mockedResponseMessage.EnsureSuccessStatusCode())
+                .IgnoreInstance()
+                .OccursOnce();
+
+            Mock.Arrange(() => mockedResponseMessage.Content.ReadAsStringAsync().Result)
+                .Returns(SAMPLE_RESPONSE_BODY)
+                .OccursOnce();
+
+            RestCallExecutor restCallExecutor = new RestCallExecutor();
+            restCallExecutor.Credentials = mockedCredentials;
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Get, URI, null, null));
+
+            Mock.Assert(_httpClient);
+            Mock.Assert(mockedResponseMessage);
+            Mock.Assert(mockedHttpClientHandler);
         }
 
         private IDictionary<String, String> CreateSampleHeaders()
