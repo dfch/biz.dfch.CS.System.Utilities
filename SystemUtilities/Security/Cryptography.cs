@@ -19,7 +19,7 @@ using System.Configuration;
 using System.Security.Cryptography;
 using System.Text;
 
-[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("SystemUtilities.Tests")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("biz.dfch.CS.System.Utilities.Tests")]
 namespace biz.dfch.CS.System.Utilities.Security
 {
     public class Cryptography
