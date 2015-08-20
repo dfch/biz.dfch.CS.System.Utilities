@@ -17,16 +17,16 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using biz.dfch.CS.System.Utilities.Rest;
+using biz.dfch.CS.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using biz.dfch.CS.System.Utilities.Attributes;
+using biz.dfch.CS.Utilities.Attributes;
 using MSTestExtensions;
 using Telerik.JustMock;
-using HttpMethod = biz.dfch.CS.System.Utilities.Rest.HttpMethod;
+using HttpMethod = biz.dfch.CS.Utilities.Rest.HttpMethod;
 
-namespace biz.dfch.CS.System.Utilities.Tests.Rest
+namespace biz.dfch.CS.Utilities.Tests.Rest
 {
     [TestClass]
     public class RestCallExecutorTest

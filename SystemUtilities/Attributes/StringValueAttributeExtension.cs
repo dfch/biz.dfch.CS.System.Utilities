@@ -17,7 +17,7 @@
 using System;
 using System.Reflection;
 
-namespace biz.dfch.CS.System.Utilities.Attributes
+namespace biz.dfch.CS.Utilities.Attributes
 {
     public static class StringValueAttributeExtension
     {

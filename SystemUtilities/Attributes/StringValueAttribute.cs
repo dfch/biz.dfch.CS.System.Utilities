@@ -16,7 +16,7 @@
 
 using System;
 
-namespace biz.dfch.CS.System.Utilities.Attributes
+namespace biz.dfch.CS.Utilities.Attributes
 {
     /// <summary>
     /// This attribute is used to represent a string value

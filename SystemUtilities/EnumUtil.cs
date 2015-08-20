@@ -15,7 +15,7 @@
  */
 ﻿using System;
 
-namespace biz.dfch.CS.System.Utilities
+namespace biz.dfch.CS.Utilities
 {
     /// <summary>
     /// Provides a generic Parse method to parse a string value

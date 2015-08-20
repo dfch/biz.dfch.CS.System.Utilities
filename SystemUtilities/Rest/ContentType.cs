@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-﻿using biz.dfch.CS.System.Utilities.Attributes;
+﻿using biz.dfch.CS.Utilities.Attributes;
 
-namespace biz.dfch.CS.System.Utilities.Rest
+namespace biz.dfch.CS.Utilities.Rest
 {
     /// <summary>
     /// Basic content for MSOData according

@@ -15,11 +15,11 @@
  */
 
 using System;
-using biz.dfch.CS.System.Utilities.Rest;
+using biz.dfch.CS.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MSTestExtensions;
 
-namespace biz.dfch.CS.System.Utilities.Tests
+namespace biz.dfch.CS.Utilities.Tests
 {
     [TestClass]
     public class EnumUtilsTest

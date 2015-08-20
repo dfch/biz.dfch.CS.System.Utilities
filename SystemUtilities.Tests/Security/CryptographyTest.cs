@@ -15,11 +15,11 @@
  */
 
 using System;
-using biz.dfch.CS.System.Utilities.Security;
+using biz.dfch.CS.Utilities.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MSTestExtensions;
 
-namespace biz.dfch.CS.System.Utilities.Tests.Security
+namespace biz.dfch.CS.Utilities.Tests.Security
 {
     [TestClass]
     public class CryptographyTest
