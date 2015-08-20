@@ -32,6 +32,7 @@ namespace biz.dfch.CS.System.Utilities.Rest
         private const int DEFAULT_TIMEOUT = 90;
         private const String DEFAULT_USER_AGENT = "RestCallExecutor";
         private const String CONTENT_TYPE_HEADER_KEY = "Content-Type";
+        private const String AUTHORIZATION_HEADER_KEY = "Authorization";
         private const String USER_AGENT_HEADER_KEY = "User-Agent";
 
         private int _Timeout;
@@ -55,13 +56,17 @@ namespace biz.dfch.CS.System.Utilities.Rest
             set { _EnsureSuccessStatusCode = value; }
         }
 
-        private ICredentials _Credentials;
-        public ICredentials Credentials
+        private String _AuthScheme;
+        /// <summary>
+        /// Sets the authentication scheme to use for creating the 'Authorization'
+        /// header out of the header values passed to the invoke method.
+        /// (i.e. Basic, Bearer, ...)
+        /// </summary>
+        public String AuthScheme
         {
-            get { return _Credentials; }
-            set { _Credentials = value; }
+            get { return _AuthScheme; }
+            set { _AuthScheme = value; }
         }
-
         #endregion
 
         #region Constructors
@@ -96,105 +101,82 @@ namespace biz.dfch.CS.System.Utilities.Rest
         }
 
         /// <summary>
-        /// Executes a HTTP GET request to the passed uri with given headers and credentials
-        /// </summary>
-        /// <param name="uri">A valid URI</param>
-        /// <param name="headers">A dictionary of headers (header key, header value)</param>
-        /// <param name="credentials">The credentials which should be used to execute the actual request</param>
-        /// <returns>The response body as String if succeded, otherwise an exception is thrown</returns>
-        public String Invoke(String uri, IDictionary<String, String> headers, ICredentials credentials)
-        {
-            return Invoke(HttpMethod.Get, uri, headers, null, credentials);
-        }
-
-        /// <summary>
         /// Executes a HTTP request based on the passed parameters
         /// </summary>
         /// <param name="method">HTTP Method (GET, PUT, POST, HEAD or DELETE)</param>
         /// <param name="uri">A valid URI</param>
         /// <param name="headers">A dictionary of headers (header key, header value)</param>
         /// <param name="body">The payload formatted according the ContentType property (default = application/json)</param>
-        /// <param name="credentials">The credentials which should be used to execute the actual request</param>
         /// <returns>he response body as String if succeded, otherwise an exception is thrown</returns>
-        public String Invoke(HttpMethod method, String uri, IDictionary<String, String> headers, String body, ICredentials credentials = null)
+        public String Invoke(HttpMethod method, String uri, IDictionary<String, String> headers, String body)
         {
             ValidateUriParameter(uri);
 
-            using (var httpClientHandler = new HttpClientHandler())
+            using (var httpClient = new HttpClient())
             {
-                SetCredentials(credentials, httpClientHandler);
+                httpClient.BaseAddress = new Uri(uri);
+                httpClient.Timeout = new TimeSpan(0, 0, _Timeout);
 
-                using (var httpClient = new HttpClient(httpClientHandler))
+                if (null != headers && headers.ContainsKey(CONTENT_TYPE_HEADER_KEY))
                 {
-                    httpClient.BaseAddress = new Uri(uri);
-                    httpClient.Timeout = new TimeSpan(0, 0, _Timeout);
-
-                    if (null != headers && headers.ContainsKey(CONTENT_TYPE_HEADER_KEY))
-                    {
-                        _ContentType = EnumUtil.Parse<ContentType>(headers[CONTENT_TYPE_HEADER_KEY]);
-                        headers.Remove(CONTENT_TYPE_HEADER_KEY);
-                    }
-
-                    httpClient.DefaultRequestHeaders.Add(USER_AGENT_HEADER_KEY, ExtractUserAgentFromHeaders(headers));
-
-                    if (null != headers)
-                    {
-                        foreach (var header in headers)
-                        {
-                            httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
-                        }
-                    }
-
-                    HttpResponseMessage response;
-
-                    switch (method)
-                    {
-                        case HttpMethod.Get:
-                        case HttpMethod.Head:
-                            response = httpClient.GetAsync(uri).Result;
-                            break;
-                        case HttpMethod.Post:
-                        {
-                            HttpContent content = new StringContent(body);
-                            content.Headers.ContentType = new MediaTypeHeaderValue(_ContentType.GetStringValue());
-                            response = httpClient.PostAsync(uri, content).Result;
-                        }
-                            break;
-                        case HttpMethod.Put:
-                        {
-                            HttpContent content = new StringContent(body);
-                            content.Headers.ContentType = new MediaTypeHeaderValue(_ContentType.GetStringValue());
-                            response = httpClient.PutAsync(uri, content).Result;
-                        }
-                            break;
-                        case HttpMethod.Delete:
-                            response = httpClient.DeleteAsync(uri).Result;
-                            break;
-                        default:
-                            throw new NotImplementedException(String.Format("{0}: Method not implemented. " +
-                                                                            "Currently only the following methods are implemented: 'GET', 'HEAD', 'POST', 'PUT', 'DELETE'.",
-                                method.GetStringValue()));
-                    }
-
-                    if (EnsureSuccessStatusCode)
-                    {
-                        response.EnsureSuccessStatusCode();
-                    }
-
-                    return response.Content.ReadAsStringAsync().Result;
+                    _ContentType = EnumUtil.Parse<ContentType>(headers[CONTENT_TYPE_HEADER_KEY]);
+                    headers.Remove(CONTENT_TYPE_HEADER_KEY);
                 }
-            }
-        }
 
-        private void SetCredentials(ICredentials credentials, HttpClientHandler httpClientHandler)
-        {
-            if (null != credentials)
-            {
-                httpClientHandler.Credentials = credentials;
-            }
-            else if (null != _Credentials)
-            {
-                httpClientHandler.Credentials = _Credentials;
+                if (null != _AuthScheme && null != headers && headers.ContainsKey(AUTHORIZATION_HEADER_KEY))
+                {
+                    httpClient.DefaultRequestHeaders.Authorization = 
+                        new AuthenticationHeaderValue(_AuthScheme, headers[AUTHORIZATION_HEADER_KEY]);
+                    headers.Remove(AUTHORIZATION_HEADER_KEY);
+                }
+
+                httpClient.DefaultRequestHeaders.Add(USER_AGENT_HEADER_KEY, ExtractUserAgentFromHeaders(headers));
+
+                if (null != headers)
+                {
+                    foreach (var header in headers)
+                    {
+                        httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    }
+                }
+
+                HttpResponseMessage response;
+
+                switch (method)
+                {
+                    case HttpMethod.Get:
+                    case HttpMethod.Head:
+                        response = httpClient.GetAsync(uri).Result;
+                        break;
+                    case HttpMethod.Post:
+                    {
+                        HttpContent content = new StringContent(body);
+                        content.Headers.ContentType = new MediaTypeHeaderValue(_ContentType.GetStringValue());
+                        response = httpClient.PostAsync(uri, content).Result;
+                    }
+                        break;
+                    case HttpMethod.Put:
+                    {
+                        HttpContent content = new StringContent(body);
+                        content.Headers.ContentType = new MediaTypeHeaderValue(_ContentType.GetStringValue());
+                        response = httpClient.PutAsync(uri, content).Result;
+                    }
+                        break;
+                    case HttpMethod.Delete:
+                        response = httpClient.DeleteAsync(uri).Result;
+                        break;
+                    default:
+                        throw new NotImplementedException(String.Format("{0}: Method not implemented. " +
+                                                                        "Currently only the following methods are implemented: 'GET', 'HEAD', 'POST', 'PUT', 'DELETE'.",
+                            method.GetStringValue()));
+                }
+
+                if (EnsureSuccessStatusCode)
+                {
+                    response.EnsureSuccessStatusCode();
+                }
+
+                return response.Content.ReadAsStringAsync().Result;
             }
         }
 

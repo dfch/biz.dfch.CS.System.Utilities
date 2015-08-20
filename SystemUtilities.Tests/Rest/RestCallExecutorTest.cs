@@ -24,7 +24,6 @@ using System.Net.Http.Headers;
 using biz.dfch.CS.System.Utilities.Attributes;
 using MSTestExtensions;
 using Telerik.JustMock;
-using Telerik.JustMock.Helpers;
 using HttpMethod = biz.dfch.CS.System.Utilities.Rest.HttpMethod;
 
 namespace biz.dfch.CS.System.Utilities.Tests.Rest
@@ -35,9 +34,12 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
         private const String URI = "http://test/api/entities";
         private const String CONTENT_TYPE_KEY = "Content-Type";
         private const String USER_AGENT_KEY = "User-Agent";
+        private const String AUTHORIZATION_HEADER_KEY = "Authorization";
         private const String TEST_USER_AGENT = "test-agent";
         private const String SAMPLE_REQUEST_BODY = "{\"Property\":\"value\"}";
         private const String SAMPLE_RESPONSE_BODY = "{\"Property2\":\"value2\"}";
+        private const String BEARER_AUTH_SCHEME = "Bearer";
+        private const String SAMPLE_BEARER_TOKEN = "AbCdEf123456";
 
         private HttpClient _httpClient;
 
@@ -114,7 +116,6 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.EnsureSuccessStatusCode())
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.Content.ReadAsStringAsync().Result)
@@ -177,7 +178,6 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.EnsureSuccessStatusCode())
-                .IgnoreInstance()
                 .Throws<HttpRequestException>()
                 .OccursOnce();
 
@@ -203,7 +203,6 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.EnsureSuccessStatusCode())
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.Content.ReadAsStringAsync().Result)
@@ -236,7 +235,6 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.EnsureSuccessStatusCode())
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.Content.ReadAsStringAsync().Result)
@@ -272,7 +270,6 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.EnsureSuccessStatusCode())
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.Content.ReadAsStringAsync().Result)
@@ -306,7 +303,6 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.EnsureSuccessStatusCode())
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.Content.ReadAsStringAsync().Result)
@@ -342,7 +338,6 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.EnsureSuccessStatusCode())
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.Content.ReadAsStringAsync().Result)
@@ -358,18 +353,15 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
         }
 
         [TestMethod]
-        public void InvokeWithCredentialsExecutesRequestWithProvidedCredentials()
+        public void InvokeWhenAuthSchemeIsSetSetsAuthorizationHeaderAccordingAuthScheme()
         {
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
-            var mockedCredentials = Mock.Create<ICredentials>();
-            var mockedHttpClientHandler = Mock.Create<HttpClientHandler>();
-
-            Mock.ArrangeSet(() => mockedHttpClientHandler.Credentials = Arg.Is(mockedCredentials))
-                .IgnoreInstance()
-                .OccursOnce();
 
             Mock.Arrange(() => _httpClient.DefaultRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
                 .IgnoreInstance()
+                .OccursOnce();
+
+            Mock.Arrange(() => new AuthenticationHeaderValue(Arg.Is(BEARER_AUTH_SCHEME), Arg.Is(SAMPLE_BEARER_TOKEN)))
                 .OccursOnce();
 
             Mock.Arrange(() => _httpClient.GetAsync(Arg.Is(new Uri(URI))).Result)
@@ -378,7 +370,6 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.EnsureSuccessStatusCode())
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.Content.ReadAsStringAsync().Result)
@@ -386,25 +377,28 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
                 .OccursOnce();
 
             RestCallExecutor restCallExecutor = new RestCallExecutor();
-            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Get, URI, null, null, mockedCredentials));
+            restCallExecutor.AuthScheme = BEARER_AUTH_SCHEME;
+            var headers = CreateSampleHeaders();
+            headers.Add(AUTHORIZATION_HEADER_KEY, SAMPLE_BEARER_TOKEN);
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Get, URI, headers, null));
 
             Mock.Assert(_httpClient);
             Mock.Assert(mockedResponseMessage);
-            Mock.Assert(mockedHttpClientHandler);
         }
 
         [TestMethod]
-        public void InvokeWithNullCredentialsExecutesRequestWithCredentialPropertyValue()
+        public void InvokeSetsAuthorizationHeaderAccordingHeadersDictionaryWhenAuthSchemeIsNotSet()
         {
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
-            var mockedCredentials = Mock.Create<ICredentials>();
-            var mockedHttpClientHandler = Mock.Create<HttpClientHandler>();
 
-            Mock.ArrangeSet(() => mockedHttpClientHandler.Credentials = Arg.Is(mockedCredentials))
+            Mock.Arrange(() => _httpClient.DefaultRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
                 .IgnoreInstance()
                 .OccursOnce();
 
-            Mock.Arrange(() => _httpClient.DefaultRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
+            Mock.Arrange(() => new AuthenticationHeaderValue(Arg.Is(BEARER_AUTH_SCHEME), Arg.Is(SAMPLE_BEARER_TOKEN)))
+                .OccursNever();
+
+            Mock.Arrange(() => _httpClient.DefaultRequestHeaders.Add(AUTHORIZATION_HEADER_KEY, SAMPLE_BEARER_TOKEN))
                 .IgnoreInstance()
                 .OccursOnce();
 
@@ -414,7 +408,6 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.EnsureSuccessStatusCode())
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedResponseMessage.Content.ReadAsStringAsync().Result)
@@ -422,12 +415,12 @@ namespace biz.dfch.CS.System.Utilities.Tests.Rest
                 .OccursOnce();
 
             RestCallExecutor restCallExecutor = new RestCallExecutor();
-            restCallExecutor.Credentials = mockedCredentials;
-            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Get, URI, null, null));
+            var headers = CreateSampleHeaders();
+            headers.Add(AUTHORIZATION_HEADER_KEY, SAMPLE_BEARER_TOKEN);
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Get, URI, headers, null));
 
             Mock.Assert(_httpClient);
             Mock.Assert(mockedResponseMessage);
-            Mock.Assert(mockedHttpClientHandler);
         }
 
         private IDictionary<String, String> CreateSampleHeaders()
