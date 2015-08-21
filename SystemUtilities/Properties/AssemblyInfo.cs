@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("biz.dfch.CS.Utilities")]
+[assembly: AssemblyTitle("biz.dfch.CS.System.Utilities")]
 [assembly: AssemblyDescription("CSharp Utilities")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("d-fens GmbH")]
-[assembly: AssemblyProduct("biz.dfch.CS.Utilities")]
+[assembly: AssemblyProduct("biz.dfch.CS.System.Utilities")]
 [assembly: AssemblyCopyright("Copyright ©  2014-2015 d-fens GmbH, Ronald Rink")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

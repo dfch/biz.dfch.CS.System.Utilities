@@ -3,14 +3,14 @@
     <metadata>
         <id>biz.dfch.CS.System.Utilities</id>
         <version>1.0.4</version>
-        <title>biz.dfch.CS.Utilities</title>
+        <title>biz.dfch.CS.System.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
 		<licenseUrl>https://github.com/dfch/biz.dfch.CS.System.Utilities/blob/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/dfch/biz.dfch.CS.System.Utilities</projectUrl>
         <iconUrl>https://avatars1.githubusercontent.com/u/8310404?v=3&amp;s=200</iconUrl>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
-        <description>biz.dfch.CS.Utilities
+        <description>biz.dfch.CS.System.Utilities
 ========================
 
 Collection of utility classes that provide functionalities like
@@ -29,6 +29,6 @@ Collection of utility classes that provide functionalities like
         </dependencies>
     </metadata>
 	<files>
-		<file src="SystemUtilities\bin\Release\biz.dfch.CS.Utilities.dll" target="lib\" />
+		<file src="SystemUtilities\bin\Release\biz.dfch.CS.System.Utilities.dll" target="lib\" />
 	</files>
 </package>
