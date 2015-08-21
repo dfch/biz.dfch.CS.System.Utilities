@@ -29,6 +29,6 @@ Collection of utility classes that provide functionalities like
         </dependencies>
     </metadata>
 	<files>
-		<file src="SystemUtilities\bin\Release\biz.dfch.CS.Utilities.dll" target="lib\biz.dfch.CS.Utilities.dll" />
+		<file src="SystemUtilities\bin\Release\biz.dfch.CS.Utilities.dll" target="lib\" />
 	</files>
 </package>
