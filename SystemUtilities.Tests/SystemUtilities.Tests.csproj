@@ -64,6 +64,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CollectionHelpersTest.cs" />
+    <Compile Include="Http\HttpRequestMessageExtensionTest.cs" />
+    <Compile Include="Http\HttpStatusErrorMessageTest.cs" />
     <Compile Include="Security\CryptographyTest.cs" />
     <Compile Include="EnumUtilsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
