@@ -28,6 +28,11 @@ Collection of utility classes that provide functionalities like
         <tags>dfch utilities C#</tags>
         <dependencies>
 			<dependency id="Newtonsoft.Json" version="6.0.8" />
+			<dependency id="Microsoft.AspNet.WebApi" version="5.2.3" />
+			<dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
+			<dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
+			<dependency id="Microsoft.AspNet.WebApi.WebHost" version="5.2.3" />
+			<dependency id="Microsoft.Data.Edm" version="5.6.4" />
         </dependencies>
     </metadata>
 	<files>
