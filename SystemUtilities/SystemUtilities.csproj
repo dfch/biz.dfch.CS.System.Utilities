@@ -33,6 +33,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -63,6 +64,9 @@
     <Compile Include="Attributes\StringValueAttribute.cs" />
     <Compile Include="Attributes\StringValueAttributeExtension.cs" />
     <Compile Include="CollectionHelpers.cs" />
+    <Compile Include="Contracts\Endpoint\IODataEndpoint.cs" />
+    <Compile Include="Contracts\Endpoint\IODataEndpointData.cs" />
+    <Compile Include="Contracts\Endpoint\ServerRole.cs" />
     <Compile Include="Http\HttpRequestMessageExtension.cs" />
     <Compile Include="Http\HttpStatusErrorMessage.cs" />
     <Compile Include="Security\Cryptography.cs" />
