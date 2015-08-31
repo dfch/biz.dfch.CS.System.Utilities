@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.System.Utilities</id>
-        <version>1.0.4</version>
+        <version>1.1.0</version>
         <title>biz.dfch.CS.System.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -21,11 +21,13 @@ Collection of utility classes that provide functionalities like
 * Start-Process assembly for invocation of processes via Interop/CreateProcessWithLogonW for use with biz.dfch.PS.System.Utilities
 		</description>
         <summary>Collection of utility classes</summary>
-        <releaseNotes>20150821
-* Package creation adjusted to only deliver dll</releaseNotes>
+        <releaseNotes>20150831
+* Contracts for ODataEndpoints added
+* HttpRequestMessage extensions added</releaseNotes>
         <copyright>Copyright © 2014 - 2015 d-fens GmbH</copyright>
         <tags>dfch utilities C#</tags>
         <dependencies>
+			<dependency id="Newtonsoft.Json" version="6.0.8" />
         </dependencies>
     </metadata>
 	<files>
