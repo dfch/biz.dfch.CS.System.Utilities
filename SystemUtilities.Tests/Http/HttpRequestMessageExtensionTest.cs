@@ -29,6 +29,7 @@ namespace biz.dfch.CS.Utilities.Tests.Http
     [TestClass]
     public class HttpRequestMessageExtensionTest
     {
+        [Ignore]
         [TestMethod]
         public void CreateCustomErrorResponseReturnsHttpResponse()
         {
