@@ -83,9 +83,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SystemUtilities\SystemUtilities.csproj">
+    <ProjectReference Include="..\biz.dfch.CS.System.Utilities\biz.dfch.CS.System.Utilities.csproj">
       <Project>{606ad897-17b7-4012-8f0c-b66c7bc21f7d}</Project>
-      <Name>SystemUtilities</Name>
+      <Name>biz.dfch.CS.System.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

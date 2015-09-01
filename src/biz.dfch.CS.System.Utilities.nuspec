@@ -36,6 +36,6 @@ Collection of utility classes that provide functionalities like
         </dependencies>
     </metadata>
 	<files>
-		<file src="SystemUtilities\bin\Release\biz.dfch.CS.System.Utilities.dll" target="lib\" />
+		<file src="biz.dfch.CS.System.Utilities\bin\Release\biz.dfch.CS.System.Utilities.dll" target="lib\" />
 	</files>
 </package>
