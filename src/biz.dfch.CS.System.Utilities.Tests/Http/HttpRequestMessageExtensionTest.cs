@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using Telerik.JustMock;
-using biz.dfch.CS.Utilities.Http;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-/**
+﻿/**
  *
  *
  * Copyright 2015 Ronald Rink, d-fens GmbH
@@ -20,18 +16,26 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
  * limitations under the License.
  *
  */
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net;
+using biz.dfch.CS.Utilities.Http;
+using Newtonsoft.Json;
+using Telerik.JustMock;
+using biz.dfch.CS.Utilities.Http;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace biz.dfch.CS.Utilities.Tests.Http
 {
     [TestClass]
     public class HttpRequestMessageExtensionTest
     {
-        [Ignore]
         [TestMethod]
-        public void CreateCustomErrorResponseReturnsHttpResponse()
+        public void CreateCustomErrorWithStringResponseReturnsHttpResponse()
         {
             var errorCode = 42;
             var errorMessage = "arbitrary-error-httpStatusErrorMessage";
@@ -39,6 +43,54 @@ namespace biz.dfch.CS.Utilities.Tests.Http
             var request = Mock.Create<HttpRequestMessage>(Behavior.RecursiveLoose, HttpMethod.Get, "http://localhost");
             var response = request.CreateCustomErrorResponse(statusCode, errorMessage, errorCode);
 
+            Assert.AreEqual(statusCode, response.StatusCode);
+            Assert.IsTrue(response.Content.ToString().Contains(errorMessage));
+            var httpStatusErrorMessage = JsonConvert.DeserializeObject<HttpStatusErrorMessage>(response.Content.ToString());
+            Assert.IsNotNull(httpStatusErrorMessage);
+        }
+
+        [TestMethod]
+        public void CreateCustomErrorWithExceptionResponseReturnsHttpResponse()
+        {
+            var errorCode = 42;
+            var errorMessage = "arbitrary-error-httpStatusErrorMessage";
+            var exception = new Exception(errorMessage);
+            var statusCode = HttpStatusCode.NotImplemented;
+            var request = Mock.Create<HttpRequestMessage>(Behavior.RecursiveLoose, HttpMethod.Get, "http://localhost");
+            var response = request.CreateCustomErrorResponse(statusCode, exception, errorCode);
+
+            Assert.AreEqual(statusCode, response.StatusCode);
+            Assert.IsTrue(response.Content.ToString().Contains(errorMessage));
+            var httpStatusErrorMessage = JsonConvert.DeserializeObject<HttpStatusErrorMessage>(response.Content.ToString());
+            Assert.IsNotNull(httpStatusErrorMessage);
+        }
+
+        [TestMethod]
+        public void CreateCustomErrorWithHttpStatusErrorMessageResponseReturnsHttpResponse()
+        {
+            //Arrange
+            var errorCode = 42;
+            var errorMessage = "arbitrary-error-httpStatusErrorMessage";
+            var statusErrorMessage = new HttpStatusErrorMessage(errorMessage);
+            var exception = new Exception(errorMessage);
+            var statusCode = HttpStatusCode.NotImplemented;
+
+            var request = Mock.Create<HttpRequestMessage>(Behavior.RecursiveLoose, HttpMethod.Get, "http://localhost");
+            var content = Mock.Create<HttpContent>();
+            Mock.Arrange(() => request.Content).IgnoreInstance().Returns(content);
+            var headers = Mock.Create<System.Net.Http.Headers.HttpRequestHeaders>();
+            headers.Host = "localhost:80";
+
+            Mock.Arrange(() => request.Headers).IgnoreInstance().Returns(headers);
+            Mock.Arrange(() => request.Method).IgnoreInstance().Returns(HttpMethod.Get);
+            Mock.Arrange(() => request.Properties).IgnoreInstance().Returns(new Dictionary<string, object>());
+            Mock.Arrange(() => request.RequestUri).IgnoreInstance().Returns(new Uri("http://localhost"));
+            Mock.Arrange(() => request.Version).IgnoreInstance().Returns(new Version(1, 0));
+
+            //Act
+            var response = request.CreateCustomErrorResponse(statusCode, statusErrorMessage);
+
+            //Assert
             Assert.AreEqual(statusCode, response.StatusCode);
             Assert.IsTrue(response.Content.ToString().Contains(errorMessage));
             var httpStatusErrorMessage = JsonConvert.DeserializeObject<HttpStatusErrorMessage>(response.Content.ToString());
