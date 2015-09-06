@@ -71,6 +71,8 @@
     <Compile Include="Attributes\StringValueAttribute.cs" />
     <Compile Include="Attributes\StringValueAttributeExtension.cs" />
     <Compile Include="CollectionHelpers.cs" />
+    <Compile Include="Contracts\Endpoint\IHttpApplicationEvents.cs" />
+    <Compile Include="Contracts\Endpoint\IHttpApplicationEventsData.cs" />
     <Compile Include="Contracts\Endpoint\IODataEndpoint.cs" />
     <Compile Include="Contracts\Endpoint\IODataEndpointData.cs" />
     <Compile Include="Contracts\Endpoint\ServerRole.cs" />

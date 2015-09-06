@@ -80,6 +80,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CollectionHelpersTest.cs" />
+    <Compile Include="Contracts\Endpoint\HttpApplicationEvents.cs" />
+    <Compile Include="Contracts\Endpoint\IHttpApplicationEventsTest.cs" />
+    <Compile Include="Contracts\Endpoint\HttpApplicationEventsDataWithData.cs" />
+    <Compile Include="Contracts\Endpoint\HttpApplicationEventsDataWithPriority.cs" />
+    <Compile Include="Contracts\Endpoint\IHttpAllicationEventsDataTest.cs" />
     <Compile Include="Contracts\Endpoint\ODataEndpointDataWithServerRole.cs" />
     <Compile Include="Contracts\Endpoint\ODataEndpointDataWithPriority.cs" />
     <Compile Include="Contracts\Endpoint\IODataEndpointDataTest.cs" />
