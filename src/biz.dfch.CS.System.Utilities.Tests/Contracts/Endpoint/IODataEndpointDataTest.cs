@@ -32,10 +32,38 @@ namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
         }
 
         [TestMethod]
-        public void IODataEndpointDataServerRoleReturnsName()
+        public void ServerRoleReturnsName()
         {
             _serverRole = ServerRole.WORKER;
             Assert.AreEqual(ServerRole.WORKER, this.ServerRole);
+        }
+
+        [TestMethod]
+        public void DefaultPriorityIsZero()
+        {
+            // Arrange
+            var exptectedPriority = 0;
+            var endpointData = new ODataEndpointDataWithPriority();
+
+            // Act
+            var result = endpointData.Priority;
+            
+            // Assert
+            Assert.AreEqual(exptectedPriority, result);
+        }
+
+        [TestMethod]
+        public void GetPriorityReturnsPriority()
+        {
+            // Arrange
+            var exptectedPriority = 42;
+            var endpointData = new ODataEndpointDataWithPriority(exptectedPriority);
+            
+            // Act
+            var result = endpointData.Priority;
+
+            // Assert
+            Assert.AreEqual(exptectedPriority, result);
         }
     }
 }
