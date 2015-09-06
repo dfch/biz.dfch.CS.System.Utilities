@@ -80,6 +80,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CollectionHelpersTest.cs" />
+    <Compile Include="Contracts\Endpoint\ODataEndpointDataWithServerRole.cs" />
+    <Compile Include="Contracts\Endpoint\ODataEndpointDataWithPriority.cs" />
     <Compile Include="Contracts\Endpoint\IODataEndpointDataTest.cs" />
     <Compile Include="Contracts\Endpoint\IODataEndpointTest.cs" />
     <Compile Include="Contracts\Endpoint\ServerRoleTest.cs" />

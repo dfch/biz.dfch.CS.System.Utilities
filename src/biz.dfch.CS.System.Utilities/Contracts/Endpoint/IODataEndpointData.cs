@@ -13,11 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System.ComponentModel;
 
 namespace biz.dfch.CS.Utilities.Contracts.Endpoint
 {
     public interface IODataEndpointData
     {
+        // Priority 0 is the lowest priority. 
+        // Plugins with this priority will be loaded last.
+        [DefaultValue(0)]
+        int Priority { get; }
+
+        [DefaultValue(ServerRole.HOST)]
         ServerRole ServerRole { get; }
     }
 }

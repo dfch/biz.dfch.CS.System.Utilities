@@ -13,29 +13,69 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+using System;
 ﻿using biz.dfch.CS.Utilities.Contracts.Endpoint;
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
 {
     [TestClass]
-    public class IODataEndpointDataTest : IODataEndpointData
+    public class IODataEndpointDataTest
     {
-        private ServerRole _serverRole;
-        public ServerRole ServerRole
+        [TestMethod]
+        public void DefaultServerRoleRetunsHOST()
         {
-            get
-            {
-                return _serverRole;
-            }
+            // Arrange
+            var exptectedServerRole = ServerRole.HOST;
+            var endpointData = new ODataEndpointDataWithServerRole();
+
+            // Act
+            var result = endpointData.ServerRole;
+
+            // Assert
+            Assert.AreEqual(exptectedServerRole, result);
         }
 
         [TestMethod]
-        public void IODataEndpointDataServerRoleReturnsName()
+        public void ServerRoleReturnsName()
         {
-            _serverRole = ServerRole.WORKER;
-            Assert.AreEqual(ServerRole.WORKER, this.ServerRole);
+            // Arrange
+            var exptectedServerRole = ServerRole.WORKER;
+            var endpointData = new ODataEndpointDataWithServerRole(exptectedServerRole);
+
+            // Act
+            var result = endpointData.ServerRole;
+
+            // Assert
+            Assert.AreEqual(exptectedServerRole, result);
+        }
+
+        [TestMethod]
+        public void DefaultPriorityReturnsZero()
+        {
+            // Arrange
+            var exptectedPriority = 0;
+            var endpointData = new ODataEndpointDataWithPriority();
+
+            // Act
+            var result = endpointData.Priority;
+            
+            // Assert
+            Assert.AreEqual(exptectedPriority, result);
+        }
+
+        [TestMethod]
+        public void GetPriorityReturnsPriority()
+        {
+            // Arrange
+            var exptectedPriority = 42;
+            var endpointData = new ODataEndpointDataWithPriority(exptectedPriority);
+            
+            // Act
+            var result = endpointData.Priority;
+
+            // Assert
+            Assert.AreEqual(exptectedPriority, result);
         }
     }
 }
