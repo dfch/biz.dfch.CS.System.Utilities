@@ -70,6 +70,7 @@
     <Compile Include="Contracts\Endpoint\IODataEndpoint.cs" />
     <Compile Include="Contracts\Endpoint\IODataEndpointData.cs" />
     <Compile Include="Contracts\Endpoint\ServerRole.cs" />
+    <Compile Include="General\Method.cs" />
     <Compile Include="Http\HttpRequestMessageExtension.cs" />
     <Compile Include="Http\HttpStatusErrorMessage.cs" />
     <Compile Include="Security\Cryptography.cs" />
