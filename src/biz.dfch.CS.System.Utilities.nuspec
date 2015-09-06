@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.System.Utilities</id>
-        <version>1.1.0</version>
+        <version>1.2.0</version>
         <title>biz.dfch.CS.System.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -19,14 +19,25 @@ Collection of utility classes that provide functionalities like
 * StringValueAttribute for Enums
 * Cryptography helper for password encryption and decryption
 * Start-Process assembly for invocation of processes via Interop/CreateProcessWithLogonW for use with biz.dfch.PS.System.Utilities
+* Log forwarders for System.Diagnostics.Debug/Trace for log4net
+* HttpApplication events for MEF plugins
+* ODataEndpoint interfaces for MEF plugins
+* Json helper methods for NewtonSoft.Json
+* Introspection and Reflection for calling methods
+* Http message response helpers
 		</description>
         <summary>Collection of utility classes</summary>
-        <releaseNotes>20150831
-* Contracts for ODataEndpoints added
-* HttpRequestMessage extensions added</releaseNotes>
+        <releaseNotes>20150906
+* Contracts for ODataEndpoints with version support
+* HttpApplication events
+* Json helpers
+* Logging helpers
+* Http message helpers
+* Introspection for calling methods</releaseNotes>
         <copyright>Copyright © 2014 - 2015 d-fens GmbH</copyright>
         <tags>dfch utilities C#</tags>
         <dependencies>
+			<dependency id="log4net" version="2.0.3" />
 			<dependency id="Newtonsoft.Json" version="6.0.8" />
 			<dependency id="Microsoft.AspNet.WebApi" version="5.2.3" />
 			<dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
