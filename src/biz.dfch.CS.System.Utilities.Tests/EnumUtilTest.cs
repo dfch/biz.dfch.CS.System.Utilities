@@ -22,7 +22,7 @@ using MSTestExtensions;
 namespace biz.dfch.CS.Utilities.Tests
 {
     [TestClass]
-    public class EnumUtilsTest
+    public class EnumUtilTest
     {
         [TestMethod]
         public void ParseForValidValueIgnoringCaseReturnsCorrespondingEnumValue()
