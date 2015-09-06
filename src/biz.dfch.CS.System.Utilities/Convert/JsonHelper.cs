@@ -20,11 +20,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Web.Script.Serialization;
-using System.Diagnostics;
+using biz.dfch.CS.Utilities.Logging;
 
 // http://stackoverflow.com/questions/3391936/using-webclient-for-json-serialization
 namespace biz.dfch.CS.Utilities.Convert
@@ -33,22 +29,17 @@ namespace biz.dfch.CS.Utilities.Convert
     {
         public static string ToJson<T>(T instance)
         {
-            string _return = String.Empty;
-            _return = new JavaScriptSerializer().Serialize(instance);
-            return _return;
+            return JsonConvert.SerializeObject(instance);
         }
 
         public static string ToJson(Object instance)
         {
-            string _return = String.Empty;
-            _return = new JavaScriptSerializer().Serialize(instance);
-            return _return;
+            return JsonConvert.SerializeObject(instance);
         }
 
         public static Dictionary<String, Object> ToJson(String instance)
         {
-            var _return = JsonConvert.DeserializeObject<Dictionary<String, Object>>(instance);
-            return _return;
+            return JsonConvert.DeserializeObject<Dictionary<String, Object>>(instance);
         }
 
         public static JToken Parse(string instance)
@@ -63,11 +54,7 @@ namespace biz.dfch.CS.Utilities.Convert
 
         public static T FromJson<T>(string json)
         {
-            var serializer = new DataContractJsonSerializer(typeof(T));
-            using (var tempStream = new MemoryStream(Encoding.Unicode.GetBytes(json)))
-            {
-                return (T)serializer.ReadObject(tempStream);
-            }
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
         public static string FromJson(Dictionary<String, Object> instance, string key, string defaultValue = "")
@@ -77,7 +64,6 @@ namespace biz.dfch.CS.Utilities.Convert
             {
                 if (instance.ContainsKey(key))
                 {
-                    //_return = instance[key].ToString();
                     dynamic value = instance[key];
                     if (value is Array && 0 <= value.Count)
                     {
@@ -91,8 +77,8 @@ namespace biz.dfch.CS.Utilities.Convert
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(String.Format("FromJson: ERROR on instance with key '{0}'", key));
-                Debug.WriteLine(String.Format("{0}: {1}\r\n{2}", ex.Source, ex.Message, ex.StackTrace));
+                Debug.WriteLine("FromJson: ERROR on instance with key '{0}'", key, "");
+                Debug.WriteException(key, ex);
                 _return = defaultValue;
             }
             if (null == _return)
@@ -129,8 +115,8 @@ namespace biz.dfch.CS.Utilities.Convert
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(String.Format("FromJson: ERROR on instance with key '{0}'", key));
-                Debug.WriteLine(String.Format("{0}: {1}\r\n{2}", ex.Source, ex.Message, ex.StackTrace));
+                Debug.WriteLine("FromJson: ERROR on instance with key '{0}'", key, "");
+                Debug.WriteException(key, ex);
                 _return = defaultValue;
             }
             if (null == _return)
@@ -142,7 +128,7 @@ namespace biz.dfch.CS.Utilities.Convert
 
         public static string EmptyString()
         {
-            return new JavaScriptSerializer().Serialize(String.Empty);
+            return JsonConvert.SerializeObject(string.Empty);
         }
     }
 }
