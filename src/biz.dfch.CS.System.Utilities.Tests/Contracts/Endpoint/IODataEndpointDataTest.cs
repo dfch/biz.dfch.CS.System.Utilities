@@ -20,7 +20,7 @@
 namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
 {
     [TestClass]
-    public class ODataEndpointDataTest : IODataEndpointData
+    public class IODataEndpointDataTest : IODataEndpointData
     {
         private ServerRole _serverRole;
         public ServerRole ServerRole
