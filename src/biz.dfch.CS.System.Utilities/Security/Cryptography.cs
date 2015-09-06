@@ -75,7 +75,7 @@ namespace biz.dfch.CS.Utilities.Security
                 using (ICryptoTransform Encryptor = Algorithm.CreateEncryptor())
                 {
                     abResult = Encryptor.TransformFinalBlock(abData, 0, abData.Length);
-                    Result = Convert.ToBase64String(abResult);
+                    Result = System.Convert.ToBase64String(abResult);
                 }
             }
             finally
@@ -115,7 +115,7 @@ namespace biz.dfch.CS.Utilities.Security
                 Algorithm.Key = Key;
                 Algorithm.Mode = CipherMode.ECB;
                 Algorithm.Padding = PaddingMode.PKCS7;
-                byte[] abEncryptedData = Convert.FromBase64String(EncryptedData);
+                byte[] abEncryptedData = System.Convert.FromBase64String(EncryptedData);
                 using (ICryptoTransform Decryptor = Algorithm.CreateDecryptor())
                 {
                     abResult = Decryptor.TransformFinalBlock(abEncryptedData, 0, abEncryptedData.Length);
