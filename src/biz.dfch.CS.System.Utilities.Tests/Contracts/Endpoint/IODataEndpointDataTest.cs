@@ -51,7 +51,7 @@ namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
         }
 
         [TestMethod]
-        public void DefaultPriorityIsZero()
+        public void DefaultPriorityReturnsZero()
         {
             // Arrange
             var exptectedPriority = 0;

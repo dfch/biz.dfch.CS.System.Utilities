@@ -19,6 +19,11 @@ namespace biz.dfch.CS.Utilities.Contracts.Endpoint
 {
     public interface IODataEndpointData
     {
+        // Priority 0 is the lowest priority. 
+        // Plugins with this priority will be loaded last.
+        [DefaultValue(0)]
+        int Priority { get; }
+
         [DefaultValue(ServerRole.HOST)]
         ServerRole ServerRole { get; }
     }
