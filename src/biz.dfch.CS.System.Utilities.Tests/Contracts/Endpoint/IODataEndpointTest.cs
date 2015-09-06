@@ -18,6 +18,7 @@
 ﻿using biz.dfch.CS.Utilities.Contracts.Endpoint;
 ﻿using Microsoft.Data.Edm;
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Reflection;
 
 namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
 {
@@ -47,6 +48,25 @@ namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
         {
             this.GetModel();
             Assert.Fail("Exception expected, but no exception has been thrown.");
+        }
+
+        public Version GetVersion()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            return assembly.GetName().Version;
+        }
+
+        [TestMethod]
+        public void VersionReturnsAssemblyVersion()
+        {
+            // this version is encoded in Assembly.cs as assembly version
+            // file and product version should match assembly version or left
+            // undefined (0.0.0.0) so they would stay equal to assembly version
+            var expectedVersion = new Version(4200, 4201, 4202, 4203);
+
+            var version = this.GetVersion();
+            
+            Assert.AreEqual(expectedVersion, version);
         }
     }
 }

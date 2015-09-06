@@ -24,5 +24,7 @@ namespace biz.dfch.CS.Utilities.Contracts.Endpoint
         IEdmModel GetModel();
 
         String GetContainerName();
+
+        Version GetVersion();
     }
 }
