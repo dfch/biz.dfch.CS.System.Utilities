@@ -23,6 +23,20 @@ namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
     public class IODataEndpointDataTest
     {
         [TestMethod]
+        public void DefaultServerRoleRetunsHOST()
+        {
+            // Arrange
+            var exptectedServerRole = ServerRole.HOST;
+            var endpointData = new ODataEndpointDataWithServerRole();
+
+            // Act
+            var result = endpointData.ServerRole;
+
+            // Assert
+            Assert.AreEqual(exptectedServerRole, result);
+        }
+
+        [TestMethod]
         public void ServerRoleReturnsName()
         {
             // Arrange
