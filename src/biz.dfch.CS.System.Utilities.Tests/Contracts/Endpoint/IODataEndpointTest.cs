@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 Marc Rufer, d-fens GmbH
+ * Copyright 2015 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,12 @@
 ﻿using biz.dfch.CS.Utilities.Contracts.Endpoint;
 ﻿using Microsoft.Data.Edm;
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Reflection;
 
 namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
 {
     [TestClass]
-    public class ODataEndpointTest : IODataEndpoint
+    public class IODataEndpointTest : IODataEndpoint
     {
         public IEdmModel GetModel()
         {
@@ -36,17 +37,36 @@ namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
         }
 
         [TestMethod]
-        public void IODataEndpointGetContainerNameReturnsName()
+        public void GetContainerNameReturnsName()
         {
             Assert.AreEqual(containerName, this.GetContainerName());
         }
 
         [TestMethod]
         [ExpectedException(typeof(NotImplementedException))]
-        public void IODataEndpointGetModelThrowsNotImplementedException()
+        public void GetModelThrowsNotImplementedException()
         {
             this.GetModel();
             Assert.Fail("Exception expected, but no exception has been thrown.");
+        }
+
+        public Version GetVersion()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            return assembly.GetName().Version;
+        }
+
+        [TestMethod]
+        public void VersionReturnsAssemblyVersion()
+        {
+            // this version is encoded in Assembly.cs as assembly version
+            // file and product version should match assembly version or left
+            // undefined (0.0.0.0) so they would stay equal to assembly version
+            var expectedVersion = new Version(4200, 4201, 4202, 4203);
+
+            var version = this.GetVersion();
+            
+            Assert.AreEqual(expectedVersion, version);
         }
     }
 }

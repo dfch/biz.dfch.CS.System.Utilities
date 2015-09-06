@@ -76,8 +76,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CollectionHelpersTest.cs" />
-    <Compile Include="Contracts\Endpoint\ODataEndpointDataTest.cs" />
-    <Compile Include="Contracts\Endpoint\ODataEndpointTest.cs" />
+    <Compile Include="Contracts\Endpoint\IODataEndpointDataTest.cs" />
+    <Compile Include="Contracts\Endpoint\IODataEndpointTest.cs" />
+    <Compile Include="Contracts\Endpoint\ServerRoleTest.cs" />
     <Compile Include="Http\HttpRequestMessageExtensionTest.cs" />
     <Compile Include="Http\HttpStatusErrorMessageTest.cs" />
     <Compile Include="Security\CryptographyTest.cs" />
