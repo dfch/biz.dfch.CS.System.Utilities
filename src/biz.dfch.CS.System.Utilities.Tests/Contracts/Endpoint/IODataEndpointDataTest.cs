@@ -13,29 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+using System;
 ﻿using biz.dfch.CS.Utilities.Contracts.Endpoint;
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
 {
     [TestClass]
-    public class IODataEndpointDataTest : IODataEndpointData
+    public class IODataEndpointDataTest
     {
-        private ServerRole _serverRole;
-        public ServerRole ServerRole
-        {
-            get
-            {
-                return _serverRole;
-            }
-        }
-
         [TestMethod]
         public void ServerRoleReturnsName()
         {
-            _serverRole = ServerRole.WORKER;
-            Assert.AreEqual(ServerRole.WORKER, this.ServerRole);
+            // Arrange
+            var exptectedServerRole = ServerRole.WORKER;
+            var endpointData = new ODataEndpointDataWithServerRole(exptectedServerRole);
+
+            // Act
+            var result = endpointData.ServerRole;
+
+            // Assert
+            Assert.AreEqual(exptectedServerRole, result);
         }
 
         [TestMethod]

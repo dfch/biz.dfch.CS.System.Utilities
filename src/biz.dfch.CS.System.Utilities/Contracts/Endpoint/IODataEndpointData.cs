@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System.ComponentModel;
 
 namespace biz.dfch.CS.Utilities.Contracts.Endpoint
 {
     public interface IODataEndpointData
     {
+        [DefaultValue(ServerRole.HOST)]
         ServerRole ServerRole { get; }
     }
 }
