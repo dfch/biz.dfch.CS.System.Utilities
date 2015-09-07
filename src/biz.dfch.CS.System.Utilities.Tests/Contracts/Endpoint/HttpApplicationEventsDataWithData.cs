@@ -41,11 +41,12 @@ namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
         {
             get
             {
+                // not needed in this test
                 throw new NotImplementedException();
             }
         }
 
-        private string _data;
+        private string _data = "";
         public string Data
         {
             get
