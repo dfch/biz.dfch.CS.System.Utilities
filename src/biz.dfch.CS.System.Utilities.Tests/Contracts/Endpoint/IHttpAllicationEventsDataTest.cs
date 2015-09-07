@@ -54,14 +54,14 @@ namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
         public void DefaultDataReturnsEmptyString()
         {
             // Arrange
-            var expectedPriority = 0;
+            var expectedData = "";
             var endpointData = new HttpApplicationEventsDataWithData();
 
             // Act
-            var result = endpointData.Priority;
+            var result = endpointData.Data;
 
             // Assert
-            Assert.AreEqual(expectedPriority, result);
+            Assert.AreEqual(expectedData, result);
         }
 
         [TestMethod]

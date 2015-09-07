@@ -91,6 +91,7 @@
     <Compile Include="Contracts\Endpoint\IODataEndpointTest.cs" />
     <Compile Include="Contracts\Endpoint\ServerRoleTest.cs" />
     <Compile Include="Convert\JsonHelperTest.cs" />
+    <Compile Include="EnumUtilTest.cs" />
     <Compile Include="General\MethodTest.cs" />
     <Compile Include="Http\HttpRequestMessageExtensionTest.cs" />
     <Compile Include="Http\HttpStatusErrorMessageTest.cs" />
@@ -98,7 +99,6 @@
     <Compile Include="Logging\DebugTest.cs" />
     <Compile Include="Logging\LogBaseTest.cs" />
     <Compile Include="Security\CryptographyTest.cs" />
-    <Compile Include="EnumUtilsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rest\RestCallExecutorTest.cs" />
     <Compile Include="Attributes\StringValueAttributeExtensionTest.cs" />
