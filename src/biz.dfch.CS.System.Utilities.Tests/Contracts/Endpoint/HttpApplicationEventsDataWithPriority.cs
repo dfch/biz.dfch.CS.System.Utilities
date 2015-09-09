@@ -37,7 +37,7 @@ namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
             _priority = priority;
         }
 
-        private int _priority;
+        private int _priority = 0;
         public int Priority
         {
             get
@@ -49,6 +49,7 @@ namespace biz.dfch.CS.Utilities.Tests.Contracts.Endpoint
         {
             get
             {
+                // not needed in this test
                 throw new NotImplementedException();
             }
         }

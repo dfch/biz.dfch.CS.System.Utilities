@@ -22,47 +22,50 @@ namespace biz.dfch.CS.Utilities.Tests.Logging
 
         #region ========== Assert ==========
         
-        [TestMethod]
-        public void AssertWithConditionMessageDetailMessage()
-        {
-            // Arrange
-            Mock.SetupStatic(typeof(System.Diagnostics.Debug));
-            Mock.Arrange(() => System.Diagnostics.Debug.Assert(condition, message, detailMessage)).OccursOnce();
+        //[Ignore]
+        //[TestMethod]
+        //public void AssertWithConditionMessageDetailMessage()
+        //{
+        //    // Arrange
+        //    Mock.SetupStatic(typeof(System.Diagnostics.Debug));
+        //    Mock.Arrange(() => System.Diagnostics.Debug.Assert(condition, message, detailMessage)).OccursOnce();
 
-            // Act
-            Debug.Assert(condition, message, detailMessage);
+        //    // Act
+        //    Debug.Assert(condition, message, detailMessage);
 
-            // Assert
-            Mock.Assert(() => System.Diagnostics.Debug.Assert(condition, message, detailMessage));
-        }
+        //    // Assert
+        //    Mock.Assert(() => System.Diagnostics.Debug.Assert(condition, message, detailMessage));
+        //}
 
-        [TestMethod]
-        public void AssertWithConditionMessage()
-        {
-            // Arrange
-            Mock.SetupStatic(typeof(System.Diagnostics.Debug));
-            Mock.Arrange(() => System.Diagnostics.Debug.Assert(condition, message)).OccursOnce();
+        //[Ignore]
+        //[TestMethod]
+        //public void AssertWithConditionMessage()
+        //{
+        //    // Arrange
+        //    Mock.SetupStatic(typeof(System.Diagnostics.Debug));
+        //    Mock.Arrange(() => System.Diagnostics.Debug.Assert(condition, message)).OccursOnce();
 
-            // Act
-            Debug.Assert(condition, message);
+        //    // Act
+        //    Debug.Assert(condition, message);
 
-            // Assert
-            Mock.Assert(() => System.Diagnostics.Debug.Assert(condition, message));
-        }
+        //    // Assert
+        //    Mock.Assert(() => System.Diagnostics.Debug.Assert(condition, message));
+        //}
 
-        [TestMethod]
-        public void AssertWithCondition()
-        {
-            // Arrange
-            Mock.SetupStatic(typeof(System.Diagnostics.Debug));
-            Mock.Arrange(() => System.Diagnostics.Debug.Assert(condition)).OccursOnce();
+        //[Ignore]
+        //[TestMethod]
+        //public void AssertWithCondition()
+        //{
+        //    // Arrange
+        //    Mock.SetupStatic(typeof(System.Diagnostics.Debug));
+        //    Mock.Arrange(() => System.Diagnostics.Debug.Assert(condition)).OccursOnce();
 
-            // Act
-            Debug.Assert(condition);
+        //    // Act
+        //    Debug.Assert(condition);
 
-            // Assert
-            Mock.Assert(() => System.Diagnostics.Debug.Assert(condition));
-        }
+        //    // Assert
+        //    Mock.Assert(() => System.Diagnostics.Debug.Assert(condition));
+        //}
         
         #endregion
 
