@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.System.Utilities</id>
-        <version>1.2.0</version>
+        <version>1.2.1</version>
         <title>biz.dfch.CS.System.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -27,7 +27,7 @@ Collection of utility classes that provide functionalities like
 * Http message response helpers
 		</description>
         <summary>Collection of utility classes</summary>
-        <releaseNotes>20150906
+        <releaseNotes>20150909
 * Contracts for ODataEndpoints with version support
 * HttpApplication events
 * Json helpers
