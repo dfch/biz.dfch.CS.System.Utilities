@@ -22,6 +22,7 @@ namespace biz.dfch.CS.Utilities.Tests.Logging
 
         #region ========== Assert ==========
         
+        [Ignore]
         [TestMethod]
         public void AssertWithConditionMessageDetailMessage()
         {
@@ -36,6 +37,7 @@ namespace biz.dfch.CS.Utilities.Tests.Logging
             Mock.Assert(() => System.Diagnostics.Debug.Assert(condition, message, detailMessage));
         }
 
+        [Ignore]
         [TestMethod]
         public void AssertWithConditionMessage()
         {
@@ -50,6 +52,7 @@ namespace biz.dfch.CS.Utilities.Tests.Logging
             Mock.Assert(() => System.Diagnostics.Debug.Assert(condition, message));
         }
 
+        [Ignore]
         [TestMethod]
         public void AssertWithCondition()
         {
