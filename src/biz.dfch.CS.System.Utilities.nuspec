@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.System.Utilities</id>
-        <version>1.2.4</version>
+        <version>1.2.5</version>
         <title>biz.dfch.CS.System.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -28,7 +28,7 @@ Collection of utility classes that provide functionalities like
 		</description>
         <summary>Collection of utility classes</summary>
         <releaseNotes>20150910
-* ODataControllerHelper added</releaseNotes>
+* BaseEntity extended</releaseNotes>
         <copyright>Copyright © 2014 - 2015 d-fens GmbH</copyright>
         <tags>dfch utilities C#</tags>
         <dependencies>
@@ -37,8 +37,11 @@ Collection of utility classes that provide functionalities like
 			<dependency id="Microsoft.AspNet.WebApi" version="5.2.3" />
 			<dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
 			<dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
+			<dependency id="Microsoft.AspNet.WebApi.OData" version="5.2.0" />
 			<dependency id="Microsoft.AspNet.WebApi.WebHost" version="5.2.3" />
 			<dependency id="Microsoft.Data.Edm" version="5.6.4" />
+			<dependency id="Microsoft.Data.OData" version="5.6.0" />
+			<dependency id="System.Spatial" version="5.6.0" />
         </dependencies>
     </metadata>
 	<files>

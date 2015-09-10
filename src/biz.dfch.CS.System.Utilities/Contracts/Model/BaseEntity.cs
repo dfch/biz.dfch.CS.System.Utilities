@@ -15,11 +15,7 @@
  */
 
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace biz.dfch.CS.Utilities.Contracts.Model
 {
@@ -34,9 +30,19 @@ namespace biz.dfch.CS.Utilities.Contracts.Model
         public String Tid { get; set; }
 
         [Required]
+        [MaxLength(1024)]
+        [StringLength(1024)]
+        public String Name { get; set; }
+
+        public String Description { get; set; }
+
+        [Required]
         public String CreatedBy { get; set; }
+        [Required]
         public String ModifiedBy { get; set; }
-        public DateTimeOffset? Created { get; set; }
-        public DateTimeOffset? Modified { get; set; }
+        [Required]
+        public DateTimeOffset Created { get; set; }
+        [Required]
+        public DateTimeOffset Modified { get; set; }
     }
 }
