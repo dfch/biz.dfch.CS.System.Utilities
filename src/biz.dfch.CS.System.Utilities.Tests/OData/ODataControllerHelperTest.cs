@@ -41,8 +41,8 @@ namespace biz.dfch.CS.Utilities.Tests.OData
         private static HttpRequestMessage httpRequestMessage;
         private const string ODATA_LINK = "http://localhost/api/Utilities.svc/BaseEntities(1)";
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext testContext)
+        [TestInitialize]
+        public void TestInitialize()
         {
             httpRequestMessage =
                 new HttpRequestMessage(HttpMethod.Post, "http://localhost/api/Utilities.svc/BaseEntities");
