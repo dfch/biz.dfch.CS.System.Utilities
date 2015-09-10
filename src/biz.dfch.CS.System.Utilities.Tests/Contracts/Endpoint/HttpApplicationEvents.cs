@@ -16,7 +16,6 @@
 
 ﻿using System;
 ﻿using biz.dfch.CS.Utilities.Contracts.Endpoint;
-﻿using Microsoft.Data.Edm;
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
 
