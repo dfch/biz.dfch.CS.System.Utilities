@@ -16,19 +16,13 @@
  * limitations under the License.
  *
  */
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Net;
 using biz.dfch.CS.Utilities.Http;
-using Newtonsoft.Json;
-using Telerik.JustMock;
-using biz.dfch.CS.Utilities.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Telerik.JustMock;
 
 namespace biz.dfch.CS.Utilities.Tests.Http
 {
@@ -44,7 +38,9 @@ namespace biz.dfch.CS.Utilities.Tests.Http
             var statusCode = HttpStatusCode.NotImplemented;
             var request = new HttpRequestMessage();
 
-            Mock.Arrange(() => request.CreateResponse(Arg.IsAny<HttpStatusCode>(), Arg.AnyString)).Returns(new HttpResponseMessage(statusCode)).OccursOnce();
+            Mock.Arrange(() => request.CreateResponse(Arg.IsAny<HttpStatusCode>(), Arg.AnyString))
+                .Returns(new HttpResponseMessage(statusCode))
+                .OccursOnce();
             
             //Act
             var response = request.CreateCustomErrorResponse(statusCode, errorMessage, errorCode);
@@ -64,7 +60,9 @@ namespace biz.dfch.CS.Utilities.Tests.Http
             var statusCode = HttpStatusCode.NotImplemented;
             var request = new HttpRequestMessage();
 
-            Mock.Arrange(() => request.CreateResponse(Arg.IsAny<HttpStatusCode>(), Arg.AnyString)).Returns(new HttpResponseMessage(statusCode)).OccursOnce();
+            Mock.Arrange(() => request.CreateResponse(Arg.IsAny<HttpStatusCode>(), Arg.AnyString))
+                .Returns(new HttpResponseMessage(statusCode))
+                .OccursOnce();
             
             //Act
             var response = request.CreateCustomErrorResponse(statusCode, exception, errorCode);
