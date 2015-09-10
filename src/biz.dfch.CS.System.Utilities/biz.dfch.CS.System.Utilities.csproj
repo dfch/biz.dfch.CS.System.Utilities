@@ -46,6 +46,7 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -76,6 +77,7 @@
     <Compile Include="Contracts\Endpoint\IODataEndpoint.cs" />
     <Compile Include="Contracts\Endpoint\IODataEndpointData.cs" />
     <Compile Include="Contracts\Endpoint\ServerRole.cs" />
+    <Compile Include="Contracts\Model\BaseEntity.cs" />
     <Compile Include="Convert\JsonHelper.cs" />
     <Compile Include="General\Method.cs" />
     <Compile Include="Http\HttpRequestMessageExtension.cs" />
