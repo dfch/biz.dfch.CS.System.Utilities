@@ -1,4 +1,6 @@
-/**
+﻿/**
+ *
+ *
  * Copyright 2015 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,27 +14,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
+using System;
+using System.Linq;
 
-using biz.dfch.CS.Utilities.Attributes;
-
-namespace biz.dfch.CS.Utilities.Rest
+namespace biz.dfch.CS.Utilities.Convert
 {
-    public enum HttpMethod
+    public class JsonObjectGeneric
     {
-        [StringValue("GET")]
-        Get,
-
-        [StringValue("HEAD")]
-        Head,
-
-        [StringValue("POST")]
-        Post,
-
-        [StringValue("PUT")]
-        Put,
-
-        [StringValue("DELETE")]
-        Delete,
+        public int Number { get; set; }
+        public string String { get; set; }
     }
 }

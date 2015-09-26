@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 Marc Rufer, d-fens GmbH
+ * Copyright 2015 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,5 +44,10 @@ namespace biz.dfch.CS.Utilities.Contracts.Model
         public DateTimeOffset Created { get; set; }
         [Required]
         public DateTimeOffset Modified { get; set; }
+
+        public BaseEntity MemberwiseClone()
+        {
+            return base.MemberwiseClone() as BaseEntity;
+        }
     }
 }

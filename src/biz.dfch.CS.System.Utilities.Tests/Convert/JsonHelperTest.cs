@@ -1,7 +1,7 @@
 ﻿/**
  *
  *
- * Copyright 2014-2015 Ronald Rink, d-fens GmbH
+ * Copyright 2014-2015 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,6 +76,28 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
             Assert.IsTrue(deserialisedObject.ContainsKey("string"));
             Assert.IsInstanceOfType(deserialisedObject["string"], typeof(String));
             Assert.AreEqual("string", deserialisedObject["string"]);
+        }
+
+        [TestMethod]
+        public void ConvertingToJsonGenericwithValidJsonStringReturnsTypedObject()
+        {
+            var jsonObjectGeneric = new JsonObjectGeneric()
+            {
+                String = "string"
+                ,
+                Number = 42
+            };
+
+            var serialisedObject = JsonHelper.ToJson<JsonObjectGeneric>(jsonObjectGeneric);
+            Assert.IsNotNull(serialisedObject);
+
+            var deserialisedObject = JsonHelper.ToJson<JsonObjectGeneric>(serialisedObject);
+
+            Assert.IsNotNull(deserialisedObject);
+            Assert.IsInstanceOfType(deserialisedObject, typeof(JsonObjectGeneric));
+
+            Assert.AreEqual((Int64)42, deserialisedObject.Number);
+            Assert.AreEqual("string", deserialisedObject.String);
         }
 
         [TestMethod]

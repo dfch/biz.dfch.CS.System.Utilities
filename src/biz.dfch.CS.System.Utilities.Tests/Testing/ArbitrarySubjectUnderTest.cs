@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2015 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-using biz.dfch.CS.Utilities.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace biz.dfch.CS.Utilities.Rest
+namespace biz.dfch.CS.Utilities.Tests.Testing
 {
-    public enum HttpMethod
+    public class ArbitrarySubjectUnderTest
     {
-        [StringValue("GET")]
-        Get,
+        public int CallingMeWithTrueReturns42ThrowsContractExceptionOtherwise(bool iMustBeTrue)
+        {
+            Contract.Requires(true == iMustBeTrue);
 
-        [StringValue("HEAD")]
-        Head,
-
-        [StringValue("POST")]
-        Post,
-
-        [StringValue("PUT")]
-        Put,
-
-        [StringValue("DELETE")]
-        Delete,
+            return 42;
+        }
     }
 }

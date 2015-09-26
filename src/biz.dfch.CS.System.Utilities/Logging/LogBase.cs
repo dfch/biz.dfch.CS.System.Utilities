@@ -1,7 +1,5 @@
 ﻿/**
- *
- *
- * Copyright 2014-2015 Ronald Rink, d-fens GmbH
+ * Copyright 2014-2015 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +14,10 @@
  * limitations under the License.
  *
  */
+
 using System;
 
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 namespace biz.dfch.CS.Utilities.Logging
 {
     public class LogBase
@@ -29,10 +29,10 @@ namespace biz.dfch.CS.Utilities.Logging
             {
                 return _log;
             }
-            //set
-            //{
-            //    _log = value;
-            //}
+            private set
+            {
+                _log = value;
+            }
         }
 
         public static void WriteException(string message, Exception ex)
