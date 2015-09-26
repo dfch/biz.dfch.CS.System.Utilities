@@ -79,6 +79,28 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
         }
 
         [TestMethod]
+        public void ConvertingToJsonGenericwithValidJsonStringReturnsTypedObject()
+        {
+            var jsonObjectGeneric = new JsonObjectGeneric()
+            {
+                String = "string"
+                ,
+                Number = 42
+            };
+
+            var serialisedObject = JsonHelper.ToJson<JsonObjectGeneric>(jsonObjectGeneric);
+            Assert.IsNotNull(serialisedObject);
+
+            var deserialisedObject = JsonHelper.ToJson<JsonObjectGeneric>(serialisedObject);
+
+            Assert.IsNotNull(deserialisedObject);
+            Assert.IsInstanceOfType(deserialisedObject, typeof(JsonObjectGeneric));
+
+            Assert.AreEqual((Int64)42, deserialisedObject.Number);
+            Assert.AreEqual("string", deserialisedObject.String);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void doParseNullThrowsArgumentNullException()
         {

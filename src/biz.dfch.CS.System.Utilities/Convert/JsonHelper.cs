@@ -32,6 +32,13 @@ namespace biz.dfch.CS.Utilities.Convert
             return JsonConvert.SerializeObject(instance);
         }
 
+        public static T ToJson<T>(String instance)
+        {
+            return JsonConvert.DeserializeObject<T>(instance);
+        }
+
+        // DFTODO - this method will probably never be called 
+        // as the signature is the same as the next method
         public static string ToJson(Object instance)
         {
             return JsonConvert.SerializeObject(instance);
