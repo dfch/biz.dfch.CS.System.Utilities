@@ -26,6 +26,7 @@ namespace biz.dfch.CS.Utilities.Http
     {
         public HttpStatusErrorMessage()
         {
+            // N/A
         }
 
         public HttpStatusErrorMessage(string message)

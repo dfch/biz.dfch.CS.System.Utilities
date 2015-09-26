@@ -44,5 +44,10 @@ namespace biz.dfch.CS.Utilities.Contracts.Model
         public DateTimeOffset Created { get; set; }
         [Required]
         public DateTimeOffset Modified { get; set; }
+
+        public BaseEntity MemberwiseClone()
+        {
+            return base.MemberwiseClone() as BaseEntity;
+        }
     }
 }
