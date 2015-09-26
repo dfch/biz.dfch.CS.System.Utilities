@@ -99,6 +99,7 @@
     <Compile Include="Convert\JsonObjectGeneric.cs" />
     <Compile Include="Convert\JsonHelper.cs" />
     <Compile Include="Http\CatchallExceptionFilterAttribute.cs" />
+    <Compile Include="Http\ContractRequiresExceptionFilterAttribute.cs" />
     <Compile Include="Http\DbEntityValidationExceptionFilterAttribute.cs" />
     <Compile Include="Http\HttpStatusExceptionFilterAttribute.cs" />
     <Compile Include="Http\HttpStatusException.cs" />
