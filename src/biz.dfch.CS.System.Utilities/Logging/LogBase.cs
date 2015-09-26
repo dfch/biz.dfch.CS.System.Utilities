@@ -22,7 +22,7 @@ namespace biz.dfch.CS.Utilities.Logging
 {
     public class LogBase
     {
-        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected static log4net.ILog log 
         { 
             get
