@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.System.Utilities</id>
-        <version>1.2.6</version>
+        <version>1.2.7</version>
         <title>biz.dfch.CS.System.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -40,7 +40,8 @@ Collection of utility classes that provide functionalities like
 * enable code contract runtime checks on ~.Tests project
 * added test for CodeContract exception attribute
 * add log4net assembly directive to load configuration from separate xml file
-* make setter on LogBase.log (log4net.ILog) private to better support testing</releaseNotes>
+* make setter on LogBase.log (log4net.ILog) private to better support testing
+* ignore CodeContracts test as it fails on TeamCity</releaseNotes>
         <copyright>Copyright © 2014 - 2015 d-fens GmbH</copyright>
         <tags>dfch utilities C#</tags>
         <dependencies>
