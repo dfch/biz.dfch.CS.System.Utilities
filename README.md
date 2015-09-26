@@ -33,6 +33,11 @@ This project containts a collection of utility classes that provide functionalit
 
 See also [Releases](https://github.com/dfch/biz.dfch.CS.System.Utilities/releases) and [Tags](https://github.com/dfch/biz.dfch.CS.System.Utilities/tags)
 
+### 1.2.7 - 20150926
+
+* ignore CodeContracts test as it fails on TeamCity
+* make setter on LogBase.log (log4net.ILog) private to better support testing
+
 ### 1.2.6 - 20150926
 
 * add attribute to test Code Contract exceptions

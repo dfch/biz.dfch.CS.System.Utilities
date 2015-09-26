@@ -15,6 +15,7 @@
  */
 
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
 using biz.dfch.CS.Utilities.Logging;
@@ -23,6 +24,18 @@ namespace biz.dfch.CS.Utilities.Http
 {
     public class CatchallExceptionFilterAttribute : ExceptionFilterAttribute
     {
+        private static bool _suppressStackTrace = false;
+
+        public CatchallExceptionFilterAttribute()
+        {
+            // N/A
+        }
+
+        public CatchallExceptionFilterAttribute(bool suppressStackTrace)
+        {
+            _suppressStackTrace = suppressStackTrace;
+        }
+        
         public override void OnException(HttpActionExecutedContext context)
         {
             if (null == context || null == context.Exception)
@@ -40,9 +53,10 @@ namespace biz.dfch.CS.Utilities.Http
                 );
             Trace.WriteException(message, ex);
 
-#if !DEBUG
-            context.Response = context.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
-#endif
+            if(_suppressStackTrace)
+            {
+                context.Response = context.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
         }
     }
 }
