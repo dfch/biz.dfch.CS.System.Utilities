@@ -32,6 +32,9 @@ This project containts a collection of utility classes that provide functionalit
 
 See also [Releases](https://github.com/dfch/biz.dfch.CS.System.Utilities/releases) and [Tags](https://github.com/dfch/biz.dfch.CS.System.Utilities/tags)
 
+### 2.0.0 - 20151221
+* moved web related classes to biz.dfch.CS.Web.Utilities
+
 ### 1.2.7 - 20150926
 
 * ignore CodeContracts test as it fails on TeamCity
