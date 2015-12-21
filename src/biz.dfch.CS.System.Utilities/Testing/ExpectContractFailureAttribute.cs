@@ -16,7 +16,6 @@
 
 using System;
 using System.Globalization;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace biz.dfch.CS.Utilities.Testing

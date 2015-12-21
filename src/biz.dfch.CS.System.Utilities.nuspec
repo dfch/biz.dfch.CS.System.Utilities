@@ -15,16 +15,12 @@
 
 Collection of utility classes that provide functionalities like
 
-* Invocation of RESTful requests (GET, HEAD, POST, PUT, DELETE)
 * StringValueAttribute for Enums
 * Cryptography helper for password encryption and decryption
 * Start-Process assembly for invocation of processes via Interop/CreateProcessWithLogonW for use with biz.dfch.PS.System.Utilities
 * Log forwarders for System.Diagnostics.Debug/Trace for log4net
-* HttpApplication events for MEF plugins
-* ODataEndpoint interfaces for MEF plugins
 * Json helper methods for NewtonSoft.Json
 * Introspection and Reflection for calling methods
-* Http message response helpers and exceptions
 		</description>
         <summary>Collection of utility classes</summary>
         <releaseNotes>20150926
