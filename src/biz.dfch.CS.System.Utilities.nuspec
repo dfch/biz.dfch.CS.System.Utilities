@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.System.Utilities</id>
-        <version>1.2.7</version>
+        <version>2.0.0</version>
         <title>biz.dfch.CS.System.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -25,7 +25,7 @@ Collection of utility classes that provide functionalities like
 		</description>
         <summary>Collection of utility classes</summary>
         <releaseNotes>20151221
-* Moved web related classes to biz.dfch.CS.Web.Utilities
+* moved web related classes to biz.dfch.CS.Web.Utilities
 </releaseNotes>
         <copyright>Copyright © 2014 - 2015 d-fens GmbH</copyright>
         <tags>dfch utilities C#</tags>
