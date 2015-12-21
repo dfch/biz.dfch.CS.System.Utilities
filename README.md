@@ -1,4 +1,5 @@
 # biz.dfch.CS.Utilities
+[![Build Status](https://build.dfch.biz/app/rest/builds/buildType:(id:CSharpDotNet_BizDfchCsSystemUtilitiesGit_Build)/statusIcon)](https://build.dfch.biz/project.html?projectId=CSharpDotNet_BizDfchCsSystemUtilitiesGit&tab=projectOverview)
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/dfch/biz.dfch.CS.System.Utilities/blob/master/LICENSE)
 ![NuGet downloads](https://img.shields.io/nuget/dt/biz.dfch.CS.System.Utilities.svg)
 ![Version](https://img.shields.io/nuget/v/biz.dfch.CS.System.Utilities.svg)
@@ -15,25 +16,24 @@ d-fens GmbH, General-Guisan-Strasse 6, CH-6300 Zug, Switzerland
 
 ## Description
 
-This project containts a collection of utility classes that provide functionalities like:
+This project containts a collection of utility classes that provide functionalities like
 
-* Invocation of RESTful requests (GET, HEAD, POST, PUT, DELETE)
 * StringValueAttribute for Enums
 * Cryptography helper for password encryption and decryption
 * Start-Process assembly for invocation of processes via Interop/CreateProcessWithLogonW for use with biz.dfch.PS.System.Utilities
   See http://d-fens.ch/2014/10/11/bug-start-job-from-scheduled-task-fails-with-event-id-8197-when-invoked-via-different-credential-set/
 * Log forwarders for System.Diagnostics.Debug/Trace for log4net
-* HttpApplication events for MEF plugins
-* ODataEndpoint interfaces for MEF plugins
 * Json helper methods for NewtonSoft.Json
 * Introspection and Reflection for calling methods
-* Http message response helpers and exceptions
 
 **Telerik JustMock has to be licensed separately. Only the code samples (source code files) are licensed under the Apache 2.0 license. The Telerik JustMock software has to be licensed separately. See the NOTICE file for more information about this.**
 
 ## [Release Notes](https://github.com/dfch/biz.dfch.CS.System.Utilities/releases)
 
 See also [Releases](https://github.com/dfch/biz.dfch.CS.System.Utilities/releases) and [Tags](https://github.com/dfch/biz.dfch.CS.System.Utilities/tags)
+
+### 2.0.0 - 20151221
+* moved web related classes to biz.dfch.CS.Web.Utilities
 
 ### 1.2.7 - 20150926
 

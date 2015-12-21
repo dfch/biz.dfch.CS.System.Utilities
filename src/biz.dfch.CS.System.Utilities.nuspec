@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.System.Utilities</id>
-        <version>1.2.7</version>
+        <version>2.0.0</version>
         <title>biz.dfch.CS.System.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -15,47 +15,23 @@
 
 Collection of utility classes that provide functionalities like
 
-* Invocation of RESTful requests (GET, HEAD, POST, PUT, DELETE)
 * StringValueAttribute for Enums
 * Cryptography helper for password encryption and decryption
 * Start-Process assembly for invocation of processes via Interop/CreateProcessWithLogonW for use with biz.dfch.PS.System.Utilities
+  See http://d-fens.ch/2014/10/11/bug-start-job-from-scheduled-task-fails-with-event-id-8197-when-invoked-via-different-credential-set/
 * Log forwarders for System.Diagnostics.Debug/Trace for log4net
-* HttpApplication events for MEF plugins
-* ODataEndpoint interfaces for MEF plugins
 * Json helper methods for NewtonSoft.Json
 * Introspection and Reflection for calling methods
-* Http message response helpers and exceptions
 		</description>
         <summary>Collection of utility classes</summary>
-        <releaseNotes>20150926
-* add attribute to test Code Contract exceptions
-* add more Json tests
-* add MemberwiseClone to BaseEntity
-* add HttpStatusException and WebApi filter
-* add DbEntityValidationException WebApi filter
-* add EntityFramework 6.1.3 dependency
-* add ODataExceptionFilterAttribute WebApi filter
-* add CatchAll WebApi filter
-* add OData GetLinkFromUri helper
-* enable code contract runtime checks on ~.Tests project
-* added test for CodeContract exception attribute
-* add log4net assembly directive to load configuration from separate xml file
-* make setter on LogBase.log (log4net.ILog) private to better support testing
-* ignore CodeContracts test as it fails on TeamCity</releaseNotes>
+        <releaseNotes>20151221
+* moved web related classes to biz.dfch.CS.Web.Utilities
+</releaseNotes>
         <copyright>Copyright © 2014 - 2015 d-fens GmbH</copyright>
         <tags>dfch utilities C#</tags>
         <dependencies>
 			<dependency id="log4net" version="2.0.3" />
 			<dependency id="Newtonsoft.Json" version="6.0.8" />
-			<dependency id="Microsoft.AspNet.WebApi" version="5.2.3" />
-			<dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
-			<dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
-			<dependency id="Microsoft.AspNet.WebApi.OData" version="5.2.0" />
-			<dependency id="Microsoft.AspNet.WebApi.WebHost" version="5.2.3" />
-			<dependency id="Microsoft.Data.Edm" version="5.6.4" />
-			<dependency id="Microsoft.Data.OData" version="5.6.0" />
-			<dependency id="System.Spatial" version="5.6.0" />
-			<dependency id="EntityFramework" version="6.1.3" />
         </dependencies>
     </metadata>
 	<files>

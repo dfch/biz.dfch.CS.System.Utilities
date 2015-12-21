@@ -17,7 +17,6 @@
 using System;
 using biz.dfch.CS.Utilities.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MSTestExtensions;
 
 namespace biz.dfch.CS.Utilities.Tests.Security
 {
@@ -32,15 +31,17 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void NewCryptographyNullThrowsArgumentNullException()
         {
-            ThrowsAssert.Throws<ArgumentNullException>(() => new Cryptography(null));
+            new Cryptography(null);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void NewCryptographyEmptyThrowsArgumentNullException()
         {
-            ThrowsAssert.Throws<ArgumentNullException>(() => new Cryptography(String.Empty));
+            new Cryptography(String.Empty);
         }
 
         [TestMethod]
@@ -59,15 +60,17 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void EncryptNullPasswordThrowsArgumentNullException()
         {
-            ThrowsAssert.Throws<ArgumentNullException>(() => Cryptography.Encrypt("Plaintext", null));
+            Cryptography.Encrypt("Plaintext", null);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void EncryptEmptyPasswordThrowsArgumentNullException()
         {
-            ThrowsAssert.Throws<ArgumentNullException>(() => Cryptography.Encrypt("Plaintext", String.Empty));
+            Cryptography.Encrypt("Plaintext", String.Empty);
         }
 
         [TestMethod]
@@ -85,9 +88,10 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void EncryptNullThrowsArgumentNullException()
         {
-            ThrowsAssert.Throws<ArgumentNullException>(() => Cryptography.Encrypt(null, "MasterP@ssw0rd"));
+            Cryptography.Encrypt(null, "MasterP@ssw0rd");
         }
 
         [TestMethod]
@@ -107,15 +111,17 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void DecryptNullPasswordThrowsArgumentNullException()
         {
-            ThrowsAssert.Throws<ArgumentNullException>(() => Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", null));
+            Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", null);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void DecryptEmptyPasswordThrowsArgumentNullException()
         {
-            ThrowsAssert.Throws<ArgumentNullException>(() => Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", String.Empty));
+            Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", String.Empty);
         }
 
         [TestMethod]
