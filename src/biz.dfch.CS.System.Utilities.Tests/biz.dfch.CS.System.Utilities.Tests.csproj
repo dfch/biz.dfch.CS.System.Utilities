@@ -106,8 +106,10 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Attributes\StringValueAttributeExtensionTest.cs" />
     <Compile Include="CollectionHelpersTest.cs" />
     <Compile Include="Convert\JsonHelperTest.cs" />
+    <Compile Include="EnumUtilTest.cs" />
     <Compile Include="General\MethodTest.cs" />
     <Compile Include="Logging\TraceTest.cs" />
     <Compile Include="Logging\DebugTest.cs" />
