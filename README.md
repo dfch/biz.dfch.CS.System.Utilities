@@ -110,3 +110,7 @@ See also [Releases](https://github.com/dfch/biz.dfch.CS.System.Utilities/release
 ### 1.0.0
 
 * Initial release
+
+[![TeamCity Logo](https://github.com/dfch/biz.dfch.CS.System.Utilities/blob/develop/TeamCity.png)](https://www.jetbrains.com/teamcity/)
+
+Built and released with TeamCity
