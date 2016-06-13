@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.System.Utilities</id>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
         <title>biz.dfch.CS.System.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -24,13 +24,14 @@ Collection of utility classes that provide functionalities like
 * Introspection and Reflection for calling methods
 		</description>
         <summary>Collection of utility classes</summary>
-        <releaseNotes>20151221
+        <releaseNotes>20160613
 * moved web related classes to biz.dfch.CS.Web.Utilities
+* updated log4net to 2.0.5 (package id 1.2.15)
 </releaseNotes>
-        <copyright>Copyright © 2014 - 2015 d-fens GmbH</copyright>
+        <copyright>Copyright © 2014 - 2016 d-fens GmbH</copyright>
         <tags>dfch utilities C#</tags>
         <dependencies>
-			<dependency id="log4net" version="2.0.3" />
+			<dependency id="log4net" version="2.0.5" />
 			<dependency id="Newtonsoft.Json" version="6.0.8" />
         </dependencies>
     </metadata>

@@ -1,7 +1,6 @@
 # biz.dfch.CS.Utilities
 [![Build Status](https://build.dfch.biz/app/rest/builds/buildType:(id:CSharpDotNet_BizDfchCsSystemUtilitiesGit_Build)/statusIcon)](https://build.dfch.biz/project.html?projectId=CSharpDotNet_BizDfchCsSystemUtilitiesGit&tab=projectOverview)
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/dfch/biz.dfch.CS.System.Utilities/blob/master/LICENSE)
-![NuGet downloads](https://img.shields.io/nuget/dt/biz.dfch.CS.System.Utilities.svg)
 ![Version](https://img.shields.io/nuget/v/biz.dfch.CS.System.Utilities.svg)
 
 Assembly: biz.dfch.CS.Utilities.dll
@@ -110,3 +109,7 @@ See also [Releases](https://github.com/dfch/biz.dfch.CS.System.Utilities/release
 ### 1.0.0
 
 * Initial release
+
+[![TeamCity Logo](https://github.com/dfch/biz.dfch.CS.System.Utilities/blob/develop/TeamCity.png)](https://www.jetbrains.com/teamcity/)
+
+Built and released with TeamCity

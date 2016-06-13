@@ -100,7 +100,7 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void doParseNullThrowsArgumentNullException()
+        public void ParseNullThrowsArgumentNullException()
         {
             var deserialisedObject = JsonHelper.Parse(null);
             Assert.Fail("This test was expected to fail already in a previous assertion.");
@@ -108,14 +108,14 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
 
         [TestMethod]
         [ExpectedException(typeof(JsonReaderException))]
-        public void doParseEmptyThrowsJsonReaderException()
+        public void DoParseEmptyThrowsJsonReaderException()
         {
             var deserialisedObject = JsonHelper.Parse(String.Empty);
             Assert.Fail("This test was expected to fail already in a previous assertion.");
         }
 
         [TestMethod]
-        public void doParseValidJsonStringReturnsObject()
+        public void ParseValidJsonStringReturnsObject()
         {
             var jsonString = @"
                 {
@@ -137,7 +137,7 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
 
         [TestMethod]
         [ExpectedException(typeof(JsonReaderException))]
-        public void doParseInvalidJsonStringReturnsObject()
+        public void ParseInvalidJsonStringReturnsObject()
         {
             var jsonString = @"
                 {
@@ -149,7 +149,7 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
         }
 
         [TestMethod]
-        public void doFromJsonJTokenReturnsString()
+        public void FromJsonJTokenReturnsString()
         {
             var defaultValue = "<default value>";
             var jsonString = @"
@@ -169,7 +169,7 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
         }
 
         [TestMethod]
-        public void doFromJsonJTokenReturnsDefaultValue()
+        public void FromJsonJTokenReturnsDefaultValue()
         {
             var defaultValue = "<default value>";
             var jsonString = @"
@@ -186,7 +186,7 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
         }
 
         [TestMethod]
-        public void doEmptyStringReturnsObject()
+        public void EmptyStringReturnsObject()
         {
             var jsonString = JsonHelper.EmptyString();
             Assert.IsNotNull(jsonString);
