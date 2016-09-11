@@ -16,6 +16,7 @@
 
 using System;
 using System.Configuration;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -27,6 +28,9 @@ namespace biz.dfch.CS.Utilities.Security
     {
         private const string APP_SETTINGS_PASSWORD = "Cryptograhpy.Password";
         private static string _password;
+        private static readonly object _lock = new object();
+
+        private static readonly UTF8Encoding _utf8 = new UTF8Encoding();
 
         internal static string Password
         {
@@ -43,30 +47,42 @@ namespace biz.dfch.CS.Utilities.Security
             _password = password;
         }
 
+        private static string GetPassword()
+        {
+            Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<string>()), "No password in AppSettings found or no password specified");
+
+            string result = default(string);
+
+            if (string.IsNullOrEmpty(_password))
+            {
+                lock (_lock)
+                {
+                    if (string.IsNullOrEmpty(_password))
+                    {
+                        _password = ConfigurationManager.AppSettings[APP_SETTINGS_PASSWORD];
+                    }
+                    result = _password;
+                }
+            }
+            else
+            {
+                result = _password;
+            }
+
+            return result;
+        }
+
         public static string Encrypt(string data, string password = null)
         {
             if (string.IsNullOrEmpty(password))
             {
-                if (string.IsNullOrEmpty(_password))
-                {
-                    _password = ConfigurationManager.AppSettings[APP_SETTINGS_PASSWORD];
-                    password = _password;
-                    if (string.IsNullOrEmpty(password))
-                    {
-                        throw new ArgumentNullException(string.Format("{0}: no password in configuration found or no password specified.", APP_SETTINGS_PASSWORD));
-                    }
-                }
-                else
-                {
-                    password = _password;
-                }
+                password = GetPassword();
             }
             
-            var utf8 = new UTF8Encoding();
             var hashProvider = new SHA256CryptoServiceProvider();
             var algorithm = new AesManaged
             {
-                Key = hashProvider.ComputeHash(utf8.GetBytes(password)),
+                Key = hashProvider.ComputeHash(_utf8.GetBytes(password)),
                 Mode = CipherMode.ECB,
                 Padding = PaddingMode.PKCS7
             };
@@ -74,7 +90,7 @@ namespace biz.dfch.CS.Utilities.Security
             string result;
             try
             {
-                var abData = utf8.GetBytes(data);
+                var abData = _utf8.GetBytes(data);
                 using (var encryptor = algorithm.CreateEncryptor())
                 {
                     var abResult = encryptor.TransformFinalBlock(abData, 0, abData.Length);
@@ -85,6 +101,7 @@ namespace biz.dfch.CS.Utilities.Security
             {
                 algorithm.Clear();
                 algorithm.Dispose();
+
                 hashProvider.Clear();
                 hashProvider.Dispose();
             }
@@ -95,26 +112,13 @@ namespace biz.dfch.CS.Utilities.Security
         {
             if (string.IsNullOrEmpty(password))
             {
-                if (string.IsNullOrEmpty(_password))
-                {
-                    _password = ConfigurationManager.AppSettings[APP_SETTINGS_PASSWORD];
-                    password = _password;
-                    if (string.IsNullOrEmpty(password))
-                    {
-                        throw new ArgumentNullException(string.Format("{0}: no password in configuration found or no password specified.", APP_SETTINGS_PASSWORD));
-                    }
-                }
-                else
-                {
-                    password = _password;
-                }
+                password = GetPassword();
             }
 
-            var utf8 = new UTF8Encoding();
             var hashProvider = new SHA256CryptoServiceProvider();
             var algorithm = new AesCryptoServiceProvider
             {
-                Key = hashProvider.ComputeHash(utf8.GetBytes(password)),
+                Key = hashProvider.ComputeHash(_utf8.GetBytes(password)),
                 Mode = CipherMode.ECB,
                 Padding = PaddingMode.PKCS7
             };
@@ -126,7 +130,7 @@ namespace biz.dfch.CS.Utilities.Security
                 using (var decryptor = algorithm.CreateDecryptor())
                 {
                     var abResult = decryptor.TransformFinalBlock(abEncryptedData, 0, abEncryptedData.Length);
-                    result = utf8.GetString(abResult);
+                    result = _utf8.GetString(abResult);
                 }
             }
             catch (Exception)

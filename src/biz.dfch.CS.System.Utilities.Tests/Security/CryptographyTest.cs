@@ -16,6 +16,7 @@
 
 using System;
 using biz.dfch.CS.Utilities.Security;
+using biz.dfch.CS.Utilities.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace biz.dfch.CS.Utilities.Tests.Security
@@ -60,15 +61,15 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void EncryptNullPasswordThrowsArgumentNullException()
+        [ExpectContractFailure]
+        public void EncryptNullPasswordThrowsContractException()
         {
             Cryptography.Encrypt("Plaintext", null);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void EncryptEmptyPasswordThrowsArgumentNullException()
+        [ExpectContractFailure]
+        public void EncryptEmptyPasswordThrowsContractException()
         {
             Cryptography.Encrypt("Plaintext", string.Empty);
         }
@@ -111,15 +112,15 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void DecryptNullPasswordThrowsArgumentNullException()
+        [ExpectContractFailure]
+        public void DecryptNullPasswordThrowsContractException()
         {
             Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", null);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void DecryptEmptyPasswordThrowsArgumentNullException()
+        [ExpectContractFailure]
+        public void DecryptEmptyPasswordThrowsContractException()
         {
             Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", string.Empty);
         }
