@@ -49,9 +49,7 @@ namespace biz.dfch.CS.Utilities.Security
 
         private static string GetPassword()
         {
-            Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<string>()), "No password in AppSettings found or no password specified");
-
-            string result = default(string);
+            string result;
 
             if (string.IsNullOrEmpty(_password))
             {
@@ -77,6 +75,7 @@ namespace biz.dfch.CS.Utilities.Security
             if (string.IsNullOrEmpty(password))
             {
                 password = GetPassword();
+                Contract.Assert(!string.IsNullOrEmpty(password), "No password in AppSettings found or no password specified");
             }
             
             var hashProvider = new SHA256CryptoServiceProvider();
@@ -113,6 +112,7 @@ namespace biz.dfch.CS.Utilities.Security
             if (string.IsNullOrEmpty(password))
             {
                 password = GetPassword();
+                Contract.Assert(!string.IsNullOrEmpty(password), "No password in AppSettings found or no password specified");
             }
 
             var hashProvider = new SHA256CryptoServiceProvider();
