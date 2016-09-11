@@ -37,9 +37,6 @@ namespace biz.dfch.CS.Utilities.Tests.Testing
             Assert.AreEqual(42, result);
         }
 
-        // DFTODO -- @rufer7 - TeamCity build fails on this test
-        // maybe because CodeContract extensions are not installed? pls investigate
-        [Ignore]
         [TestMethod]
         [ExpectContractFailureAttribute]
         public void RunningTestWithFalseThrowsCodeContractException()
