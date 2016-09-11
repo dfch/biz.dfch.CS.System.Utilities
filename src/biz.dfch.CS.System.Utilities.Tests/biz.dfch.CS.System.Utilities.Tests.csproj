@@ -117,8 +117,7 @@
     <Compile Include="Logging\LogBaseTest.cs" />
     <Compile Include="Security\CryptographyTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Testing\ArbitrarySubjectUnderTest.cs" />
-    <Compile Include="Testing\ExpectContractFailureAttributeTest.cs" />
+    <Compile Include="Testing\CodeContractsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

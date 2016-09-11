@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("d-fens GmbH")]
 [assembly: AssemblyProduct("biz.dfch.CS.System.Utilities")]
 [assembly: AssemblyCopyright("Copyright © 2014-2016 d-fens GmbH")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("d-fens is a registered trademark in the European Union and/or other countries.")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -34,3 +34,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("2.0.1.*")]
 //[assembly: AssemblyFileVersion("1.0.0.0")]
+
+[assembly: InternalsVisibleTo("biz.dfch.CS.System.Utilities.Tests")]

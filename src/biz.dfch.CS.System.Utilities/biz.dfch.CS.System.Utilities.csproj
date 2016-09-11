@@ -110,6 +110,7 @@
     <Compile Include="Process.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Testing\CodeContracts.cs" />
     <Compile Include="Testing\ExpectContractFailureAttribute.cs" />
   </ItemGroup>
   <ItemGroup>

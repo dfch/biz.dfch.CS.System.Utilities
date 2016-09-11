@@ -15,22 +15,17 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using biz.dfch.CS.Utilities.Testing;
 
 namespace biz.dfch.CS.Utilities.Tests.Testing
 {
     [TestClass]
-    public class ExpectContractFailureAttributeTest
+    public class CodeContractsTest
     {
         [TestMethod]
         public void RunningTestWithTrueSucceeds()
         {
-            var sut = new ArbitrarySubjectUnderTest();
+            var sut = new CodeContracts();
 
             var result = sut.CallingMeWithTrueReturns42ThrowsContractExceptionOtherwise(true);
 
@@ -41,7 +36,7 @@ namespace biz.dfch.CS.Utilities.Tests.Testing
         [ExpectContractFailureAttribute]
         public void RunningTestWithFalseThrowsCodeContractException()
         {
-            var sut = new ArbitrarySubjectUnderTest();
+            var sut = new CodeContracts();
 
             var result = sut.CallingMeWithTrueReturns42ThrowsContractExceptionOtherwise(false);
 

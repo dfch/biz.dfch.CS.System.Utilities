@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace biz.dfch.CS.Utilities.Tests.Testing
+namespace biz.dfch.CS.Utilities.Testing
 {
-    public class ArbitrarySubjectUnderTest
+    internal class CodeContracts
     {
-        public int CallingMeWithTrueReturns42ThrowsContractExceptionOtherwise(bool iMustBeTrue)
+        public int CallingMeWithTrueReturns42ThrowsContractExceptionOtherwise(bool itMustBeTrue)
         {
-            Contract.Requires(true == iMustBeTrue);
+            Contract.Requires(itMustBeTrue);
 
             return 42;
         }
