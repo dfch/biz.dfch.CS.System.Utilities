@@ -30,21 +30,21 @@ namespace biz.dfch.CS.Utilities.Convert
             return JsonConvert.SerializeObject(instance);
         }
 
-        public static T ToJson<T>(String instance)
+        public static T ToJson<T>(string instance)
         {
             return JsonConvert.DeserializeObject<T>(instance);
         }
 
         // DFTODO - this method will probably never be called 
         // as the signature is the same as the next method
-        public static string ToJson(Object instance)
+        public static string ToJson(object instance)
         {
             return JsonConvert.SerializeObject(instance);
         }
 
-        public static Dictionary<String, Object> ToJson(String instance)
+        public static Dictionary<string, object> ToJson(string instance)
         {
-            return JsonConvert.DeserializeObject<Dictionary<String, Object>>(instance);
+            return JsonConvert.DeserializeObject<Dictionary<string, object>>(instance);
         }
 
         public static JToken Parse(string instance)
@@ -62,7 +62,7 @@ namespace biz.dfch.CS.Utilities.Convert
             return JsonConvert.DeserializeObject<T>(json);
         }
 
-        public static string FromJson(Dictionary<String, Object> instance, string key, string defaultValue = "")
+        public static string FromJson(Dictionary<string, object> instance, string key, string defaultValue = "")
         {
             string _return = defaultValue;
             try
@@ -88,7 +88,7 @@ namespace biz.dfch.CS.Utilities.Convert
             }
             if (null == _return)
             {
-                throw new ArgumentException(String.Format("Key '{0}' not found.", key));
+                throw new ArgumentException(string.Format("Key '{0}' not found.", key));
             }
             return _return;
         }
@@ -108,7 +108,7 @@ namespace biz.dfch.CS.Utilities.Convert
                     var jArray = JToken.Parse(_return);
                     if (jArray is JArray)
                     {
-                        _return = jArray.ToObject<List<String>>()[0].ToString();
+                        _return = jArray.ToObject<List<string>>()[0].ToString();
                     }
                 }
                 catch
@@ -126,7 +126,7 @@ namespace biz.dfch.CS.Utilities.Convert
             }
             if (null == _return)
             {
-                throw new ArgumentException(String.Format("Key '{0}' not found.", key));
+                throw new ArgumentException(string.Format("Key '{0}' not found.", key));
             }
             return _return;
         }

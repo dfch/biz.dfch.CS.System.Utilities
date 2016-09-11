@@ -28,7 +28,7 @@ namespace biz.dfch.CS.Utilities.Attributes
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static String GetStringValue(this Enum value)
+        public static string GetStringValue(this Enum value)
         {
             // Get the type
             Type type = value.GetType();

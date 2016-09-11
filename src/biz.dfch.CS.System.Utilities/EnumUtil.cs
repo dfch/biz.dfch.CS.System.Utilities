@@ -31,7 +31,7 @@ namespace biz.dfch.CS.Utilities
         /// <param name="value"></param>
         /// <param name="ignoreCase"></param>
         /// <returns></returns>
-        public static T Parse<T>(String value, Boolean ignoreCase = true)
+        public static T Parse<T>(string value, bool ignoreCase = true)
         {
             return (T)Enum.Parse(typeof(T), value, ignoreCase);
         }

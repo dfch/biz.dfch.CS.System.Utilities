@@ -31,7 +31,7 @@ namespace biz.dfch.CS.Utilities.Attributes
         /// <summary>
         /// Holds the stringvalue for a value in an enum.
         /// </summary>
-        public String StringValue { get; protected set; }
+        public string StringValue { get; protected set; }
 
         #endregion
 
@@ -41,7 +41,7 @@ namespace biz.dfch.CS.Utilities.Attributes
         /// Constructor used to init a StringValue Attribute
         /// </summary>
         /// <param name="value"></param>
-        public StringValueAttribute(String value)
+        public StringValueAttribute(string value)
         {
             this.StringValue = value;
         }

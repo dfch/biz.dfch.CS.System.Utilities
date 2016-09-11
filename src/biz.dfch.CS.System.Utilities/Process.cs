@@ -49,20 +49,20 @@ namespace biz.dfch.CS.Utilities
         [StructLayout(LayoutKind.Sequential)]
         public struct STARTUPINFO
         {
-            public Int32 cb;
-            public String lpReserved;
-            public String lpDesktop;
-            public String lpTitle;
-            public Int32 dwX;
-            public Int32 dwY;
-            public Int32 dwXSize;
-            public Int32 dwYSize;
-            public Int32 dwXCountChars;
-            public Int32 dwYCountChars;
-            public Int32 dwFillAttribute;
-            public Int32 dwFlags;
-            public Int16 wShowWindow;
-            public Int16 cbReserved2;
+            public int cb;
+            public string lpReserved;
+            public string lpDesktop;
+            public string lpTitle;
+            public int dwX;
+            public int dwY;
+            public int dwXSize;
+            public int dwYSize;
+            public int dwXCountChars;
+            public int dwYCountChars;
+            public int dwFillAttribute;
+            public int dwFlags;
+            public short wShowWindow;
+            public short cbReserved2;
             public IntPtr lpReserved2;
             public IntPtr hStdInput;
             public IntPtr hStdOutput;
@@ -74,34 +74,34 @@ namespace biz.dfch.CS.Utilities
         {
             public IntPtr hProcess;
             public IntPtr hThread;
-            public Int32 dwProcessId;
-            public Int32 dwThreadId;
+            public int dwProcessId;
+            public int dwThreadId;
         }
 
         [DllImport("kernel32.dll")]
         static extern bool SetHandleInformation(IntPtr hObject, int dwMask, uint dwFlags);
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern bool CreatePipe(out IntPtr phReadPipe, out IntPtr phWritePipe, IntPtr lpPipeAttributes, UInt32 nSize);
+        static extern bool CreatePipe(out IntPtr phReadPipe, out IntPtr phWritePipe, IntPtr lpPipeAttributes, uint nSize);
 
         [DllImport("advapi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern Boolean CreateProcessWithLogonW
+        public static extern bool CreateProcessWithLogonW
         (
-            String lpszUsername,
-            String lpszDomain,
-            String lpszPassword,
-            Int32 dwLogonFlags,
-            String applicationName,
-            String commandLine,
-            Int32 creationFlags,
+            string lpszUsername,
+            string lpszDomain,
+            string lpszPassword,
+            int dwLogonFlags,
+            string applicationName,
+            string commandLine,
+            int creationFlags,
             IntPtr environment,
-            String currentDirectory,
+            string currentDirectory,
             ref STARTUPINFO sui,
             out PROCESS_INFORMATION processInfo
         );
 
         [DllImport("kernel32", SetLastError = true)]
-        public static extern Boolean CloseHandle(IntPtr handle);
+        public static extern bool CloseHandle(IntPtr handle);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool GetExitCodeProcess(IntPtr hProcess, out uint ExitCode);
@@ -270,7 +270,7 @@ namespace biz.dfch.CS.Utilities
                 //readerStdout.Close();
                 //OutputParameter[ResultDictionaryNameEnum.STDOUT.ToString()] = sb.ToString();
 
-                UInt32 processExitCode = UInt32.MaxValue;
+                uint processExitCode = uint.MaxValue;
                 fReturn = GetExitCodeProcess(processInfo.hProcess, out processExitCode);
                 lock (OutputParameter)
                 {

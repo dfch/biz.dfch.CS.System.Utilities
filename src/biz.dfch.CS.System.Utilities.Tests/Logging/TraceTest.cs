@@ -27,7 +27,7 @@ namespace biz.dfch.CS.Utilities.Tests.Logging
     public class TraceTest
     {
         private readonly bool condition = true;
-        private readonly Object value = new Object();
+        private readonly object value = new object();
         private readonly string message = "arbitrary-message";
         private readonly Exception ex = new Exception("arbitrary-exception-message");
         private readonly string detailMessage = "arbitrary-detail-message";
@@ -192,7 +192,7 @@ namespace biz.dfch.CS.Utilities.Tests.Logging
             // Arrange
             var log4net = Mock.Create<log4net.ILog>();
             Mock.Arrange(() => log4net.IsInfoEnabled).Returns(true);
-            Mock.Arrange(() => log4net.InfoFormat(Arg.AnyString, value, Arg.IsAny<Object>()))
+            Mock.Arrange(() => log4net.InfoFormat(Arg.AnyString, value, Arg.IsAny<object>()))
                 .IgnoreInstance()
                 .OccursOnce();
 
@@ -209,7 +209,7 @@ namespace biz.dfch.CS.Utilities.Tests.Logging
             // Arrange
             var log4net = Mock.Create<log4net.ILog>();
             Mock.Arrange(() => log4net.IsInfoEnabled).Returns(false);
-            Mock.Arrange(() => log4net.InfoFormat(Arg.AnyString, value, Arg.IsAny<Object>()))
+            Mock.Arrange(() => log4net.InfoFormat(Arg.AnyString, value, Arg.IsAny<object>()))
                 .IgnoreInstance()
                 .OccursOnce();
 
@@ -226,7 +226,7 @@ namespace biz.dfch.CS.Utilities.Tests.Logging
             // Arrange
             var log4net = Mock.Create<log4net.ILog>();
             Mock.Arrange(() => log4net.IsInfoEnabled).Returns(true);
-            Mock.Arrange(() => log4net.Info(Arg.IsAny<Object>()))
+            Mock.Arrange(() => log4net.Info(Arg.IsAny<object>()))
                 .IgnoreInstance()
                 .OccursOnce();
 
@@ -243,7 +243,7 @@ namespace biz.dfch.CS.Utilities.Tests.Logging
             // Arrange
             var log4net = Mock.Create<log4net.ILog>();
             Mock.Arrange(() => log4net.IsInfoEnabled).Returns(false);
-            Mock.Arrange(() => log4net.Info(Arg.IsAny<Object>()))
+            Mock.Arrange(() => log4net.Info(Arg.IsAny<object>()))
                 .IgnoreInstance()
                 .OccursNever();
 
@@ -370,7 +370,7 @@ namespace biz.dfch.CS.Utilities.Tests.Logging
             // Arrange
             var log4net = Mock.Create<log4net.ILog>();
             Mock.Arrange(() => log4net.IsInfoEnabled).Returns(true);
-            Mock.Arrange(() => log4net.InfoFormat(Arg.AnyString, value, Arg.IsAny<Object>()))
+            Mock.Arrange(() => log4net.InfoFormat(Arg.AnyString, value, Arg.IsAny<object>()))
                 .IgnoreInstance()
                 .OccursOnce();
 
@@ -387,7 +387,7 @@ namespace biz.dfch.CS.Utilities.Tests.Logging
             // Arrange
             var log4net = Mock.Create<log4net.ILog>();
             Mock.Arrange(() => log4net.IsInfoEnabled).Returns(false);
-            Mock.Arrange(() => log4net.InfoFormat(Arg.AnyString, value, Arg.IsAny<Object>()))
+            Mock.Arrange(() => log4net.InfoFormat(Arg.AnyString, value, Arg.IsAny<object>()))
                 .IgnoreInstance()
                 .OccursOnce();
 

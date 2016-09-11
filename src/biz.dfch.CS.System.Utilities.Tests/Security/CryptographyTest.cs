@@ -41,7 +41,7 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         [ExpectedException(typeof(ArgumentNullException))]
         public void NewCryptographyEmptyThrowsArgumentNullException()
         {
-            new Cryptography(String.Empty);
+            new Cryptography(string.Empty);
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         [ExpectedException(typeof(ArgumentNullException))]
         public void EncryptEmptyPasswordThrowsArgumentNullException()
         {
-            Cryptography.Encrypt("Plaintext", String.Empty);
+            Cryptography.Encrypt("Plaintext", string.Empty);
         }
 
         [TestMethod]
@@ -97,7 +97,7 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         [TestMethod]
         public void EncryptEmpty()
         {
-            var Password = Cryptography.Encrypt(String.Empty, "MasterP@ssw0rd");
+            var Password = Cryptography.Encrypt(string.Empty, "MasterP@ssw0rd");
             Assert.AreEqual("Bt9avcuVQC2SliZ79DJUFw==", Password);
         }
 
@@ -121,7 +121,7 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         [ExpectedException(typeof(ArgumentNullException))]
         public void DecryptEmptyPasswordThrowsArgumentNullException()
         {
-            Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", String.Empty);
+            Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", string.Empty);
         }
 
         [TestMethod]
@@ -148,7 +148,7 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         [TestMethod]
         public void DecryptEmpty()
         {
-            var Plaintext = Cryptography.Decrypt(String.Empty, "MasterP@ssw0rd");
+            var Plaintext = Cryptography.Decrypt(string.Empty, "MasterP@ssw0rd");
             Assert.AreEqual("", Plaintext);
         }
 

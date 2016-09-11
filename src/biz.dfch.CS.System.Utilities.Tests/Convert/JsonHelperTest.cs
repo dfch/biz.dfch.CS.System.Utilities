@@ -29,7 +29,7 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
         [ClassInitialize()]
         public static void ClassInitialize(TestContext testContext)
         {
-            Trace.WriteLine(String.Format("classInitialize: '{0}'", testContext.TestName));
+            Trace.WriteLine(string.Format("classInitialize: '{0}'", testContext.TestName));
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
         [TestMethod]
         public void doToJsonEmptyReturnsNull()
         {
-            var deserialisedObject = JsonHelper.ToJson(String.Empty);
+            var deserialisedObject = JsonHelper.ToJson(string.Empty);
             Assert.IsNull(deserialisedObject);
         }
 
@@ -68,11 +68,11 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
             Assert.IsNotNull(deserialisedObject);
 
             Assert.IsTrue(deserialisedObject.ContainsKey("number"));
-            Assert.IsInstanceOfType(deserialisedObject["number"], typeof(Int64));
-            Assert.AreEqual((Int64)42, deserialisedObject["number"]);
+            Assert.IsInstanceOfType(deserialisedObject["number"], typeof(long));
+            Assert.AreEqual((long)42, deserialisedObject["number"]);
 
             Assert.IsTrue(deserialisedObject.ContainsKey("string"));
-            Assert.IsInstanceOfType(deserialisedObject["string"], typeof(String));
+            Assert.IsInstanceOfType(deserialisedObject["string"], typeof(string));
             Assert.AreEqual("string", deserialisedObject["string"]);
         }
 
@@ -94,7 +94,7 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
             Assert.IsNotNull(deserialisedObject);
             Assert.IsInstanceOfType(deserialisedObject, typeof(JsonObjectGeneric));
 
-            Assert.AreEqual((Int64)42, deserialisedObject.Number);
+            Assert.AreEqual((long)42, deserialisedObject.Number);
             Assert.AreEqual("string", deserialisedObject.String);
         }
 
@@ -110,7 +110,7 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
         [ExpectedException(typeof(JsonReaderException))]
         public void DoParseEmptyThrowsJsonReaderException()
         {
-            var deserialisedObject = JsonHelper.Parse(String.Empty);
+            var deserialisedObject = JsonHelper.Parse(string.Empty);
             Assert.Fail("This test was expected to fail already in a previous assertion.");
         }
 

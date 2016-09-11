@@ -33,11 +33,11 @@ namespace biz.dfch.CS.Utilities.Security
             set { Cryptography._Password = value; }
         }
 
-        internal Cryptography(String Password)
+        internal Cryptography(string Password)
         {
-            if (String.IsNullOrEmpty(Password))
+            if (string.IsNullOrEmpty(Password))
             {
-                throw new ArgumentNullException(String.Format("No or empty password specified."));
+                throw new ArgumentNullException(string.Format("No or empty password specified."));
             }
             _Password = Password;
         }
@@ -46,13 +46,13 @@ namespace biz.dfch.CS.Utilities.Security
         {
             if (string.IsNullOrEmpty(Password))
             {
-                if (String.IsNullOrEmpty(_Password))
+                if (string.IsNullOrEmpty(_Password))
                 {
                     _Password = ConfigurationManager.AppSettings[_AppSettingsPassword];
                     Password = _Password;
                     if (string.IsNullOrEmpty(Password))
                     {
-                        throw new ArgumentNullException(String.Format("{0}: no password in configuration found or no password specified.", _AppSettingsPassword));
+                        throw new ArgumentNullException(string.Format("{0}: no password in configuration found or no password specified.", _AppSettingsPassword));
                     }
                 }
                 else
@@ -90,13 +90,13 @@ namespace biz.dfch.CS.Utilities.Security
         {
             if (string.IsNullOrEmpty(Password))
             {
-                if (String.IsNullOrEmpty(_Password))
+                if (string.IsNullOrEmpty(_Password))
                 {
                     _Password = ConfigurationManager.AppSettings[_AppSettingsPassword];
                     Password = _Password;
                     if (string.IsNullOrEmpty(Password))
                     {
-                        throw new ArgumentNullException(String.Format("{0}: no password in configuration found or no password specified.", _AppSettingsPassword));
+                        throw new ArgumentNullException(string.Format("{0}: no password in configuration found or no password specified.", _AppSettingsPassword));
                     }
                 }
                 else
