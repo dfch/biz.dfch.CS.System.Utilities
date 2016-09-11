@@ -51,7 +51,7 @@ namespace biz.dfch.CS.Utilities.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void ParseWithInvalidValueThrowsArgumentException()
         {
-            EnumUtil.Parse<Importance>("test", false);
+            EnumUtil.Parse<Importance>("invalid-value", false);
         }
     }
 
