@@ -17,7 +17,10 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
 using biz.dfch.CS.Utilities.Logging;
 
 // http://stackoverflow.com/questions/3391936/using-webclient-for-json-serialization
@@ -37,6 +40,7 @@ namespace biz.dfch.CS.Utilities.Convert
 
         // DFTODO - this method will probably never be called 
         // as the signature is the same as the next method
+        [Obsolete("Do not use this method.")]
         public static string ToJson(object instance)
         {
             return JsonConvert.SerializeObject(instance);
@@ -62,17 +66,26 @@ namespace biz.dfch.CS.Utilities.Convert
             return JsonConvert.DeserializeObject<T>(json);
         }
 
+        [Obsolete("Do not use this method.")]
         public static string FromJson(Dictionary<string, object> instance, string key, string defaultValue = "")
         {
+            Contract.Ensures(null != Contract.Result<string>());
+
             string _return = defaultValue;
             try
             {
                 if (instance.ContainsKey(key))
                 {
-                    dynamic value = instance[key];
-                    if (value is Array && 0 <= value.Count)
+                    var value = instance[key];
+
+                    var collection = value as ICollection;
+                    if (null != collection && 0 < collection.Count)
                     {
-                        _return = value[0];
+                        foreach (var item in collection)
+                        {
+                            _return = item.ToString();
+                            break;
+                        }
                     }
                     else
                     {
@@ -82,19 +95,16 @@ namespace biz.dfch.CS.Utilities.Convert
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("FromJson: ERROR on instance with key '{0}'", key, "");
-                Debug.WriteException(key, ex);
+                Debug.WriteException(string.Format("FromJson: ERROR on instance with key '{0}'", key), ex);
                 _return = defaultValue;
-            }
-            if (null == _return)
-            {
-                throw new ArgumentException(string.Format("Key '{0}' not found.", key));
             }
             return _return;
         }
 
         public static string FromJson(JToken instance, string key, string defaultValue = "")
         {
+            Contract.Ensures(null != Contract.Result<string>());
+
             string _return = defaultValue;
             try
             {
@@ -120,14 +130,10 @@ namespace biz.dfch.CS.Utilities.Convert
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("FromJson: ERROR on instance with key '{0}'", key, "");
-                Debug.WriteException(key, ex);
+                Debug.WriteException(string.Format("FromJson: ERROR on instance with key '{0}'", key), ex);
                 _return = defaultValue;
             }
-            if (null == _return)
-            {
-                throw new ArgumentException(string.Format("Key '{0}' not found.", key));
-            }
+
             return _return;
         }
 

@@ -15,6 +15,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -192,5 +193,144 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
             Assert.IsNotNull(jsonString);
             Assert.AreEqual("\"\"", jsonString);
         }
+
+        [TestMethod]
+        public void GettingStringValueOfExistingKeySucceeds()
+        {
+            var key = "string-key1";
+            var value = "string-value1";
+            var defaultValue = "default-string-value";
+            var list = new List<string>
+            {
+                "item1", "item2", "item3"
+            };
+
+            var dic = new Dictionary<string, object>
+            {
+                {key, value},
+                {"int-key2", 42},
+                {"array-key3", list}
+            };
+
+            var result = JsonHelper.FromJson(dic, key, defaultValue);
+
+            Assert.AreEqual(value, result);
+        }
+
+        [TestMethod]
+        public void GettingDefaultStringValueOfInexistingKeySucceeds()
+        {
+            var key = "inexistent-string-key1";
+            var value = "string-value1";
+            var defaultValue = "default-string-value";
+            var list = new List<string>
+            {
+                "item1", "item2", "item3"
+            };
+
+            var dic = new Dictionary<string, object>
+            {
+                {"string-key1", value},
+                {"int-key2", 42},
+                {"array-key3", list}
+            };
+
+            var result = JsonHelper.FromJson(dic, key, defaultValue);
+
+            Assert.AreEqual(defaultValue, result);
+        }
+
+        [TestMethod]
+        public void GettingIntValueOfExistingKeySucceeds()
+        {
+            var key = "int-key2";
+            var value = 42;
+            var defaultValue = 5;
+            var list = new List<string>
+            {
+                "item1", "item2", "item3"
+            };
+
+            var dic = new Dictionary<string, object>
+            {
+                {"string-key1", "string-value"},
+                {key, value},
+                {"array-key3", list}
+            };
+
+            var result = JsonHelper.FromJson(dic, key, defaultValue.ToString());
+
+            Assert.AreEqual(value.ToString(), result);
+        }
+
+        [TestMethod]
+        public void GettingDefaultIntValueOfInexistingKeySucceeds()
+        {
+            var key = "inexistent-int-key2";
+            var value = 42;
+            var defaultValue = 5;
+            var list = new List<string>
+            {
+                "item1", "item2", "item3"
+            };
+
+            var dic = new Dictionary<string, object>
+            {
+                {"string-key1", "string-value"},
+                {"int-key2", value},
+                {"array-key3", list}
+            };
+
+            var result = JsonHelper.FromJson(dic, key, defaultValue.ToString());
+
+            Assert.AreEqual(defaultValue.ToString(), result);
+        }
+
+        [TestMethod]
+        public void GettingArrayValueOfExistingKeySucceeds()
+        {
+            var key ="array-key3";
+            var defaultValue = "default-string-value";
+            var value = "item1";
+            var list = new List<string>
+            {
+                value, "item2", "item3"
+            };
+
+            var dic = new Dictionary<string, object>
+            {
+                {"string-key1", "string-value1"},
+                {"int-key2", 42},
+                {key, list},
+            };
+
+            var result = JsonHelper.FromJson(dic, key, defaultValue);
+
+            Assert.AreEqual(value, result);
+        }
+
+        [TestMethod]
+        public void GettingDefaultArrayValueOfInexistingKeySucceeds()
+        {
+            var key = "inexistent-array-key3";
+            var value = "item1";
+            var defaultValue = "default-string-value";
+            var list = new List<string>
+            {
+                value, "item2", "item3"
+            };
+
+            var dic = new Dictionary<string, object>
+            {
+                {"string-key1", "string-value1"},
+                {"int-key2", 42},
+                {"array-key3", list},
+            };
+
+            var result = JsonHelper.FromJson(dic, key, defaultValue);
+
+            Assert.AreEqual(defaultValue, result);
+        }
+
     }
 }
