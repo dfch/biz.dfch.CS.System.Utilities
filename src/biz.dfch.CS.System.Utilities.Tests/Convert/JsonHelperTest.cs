@@ -26,22 +26,22 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
     [TestClass]
     public class JsonHelperTest
     {
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
-            Trace.WriteLine(string.Format("classInitialize: '{0}'", testContext.TestName));
+            //Trace.WriteLine(string.Format("classInitialize: '{0}'", testContext.TestName));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void doToJsonNullThrowsArgumentNullException()
+        public void ToJsonNullThrowsArgumentNullException()
         {
             var deserialisedObject = JsonHelper.ToJson(null);
             Assert.Fail("This test was expected to fail already in a previous assertion.");
         }
 
         [TestMethod]
-        public void doToJsonEmptyReturnsNull()
+        public void ToJsonEmptyReturnsNull()
         {
             var deserialisedObject = JsonHelper.ToJson(string.Empty);
             Assert.IsNull(deserialisedObject);
@@ -49,14 +49,14 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
 
         [TestMethod]
         [ExpectedException(typeof(JsonReaderException))]
-        public void doToJsonInvalidJsonStringThrowsJsonReaderException()
+        public void ToJsonInvalidJsonStringThrowsJsonReaderException()
         {
             var deserialisedObject = JsonHelper.ToJson("invalid-json-string");
             Assert.Fail("This test was expected to fail already in a previous assertion.");
         }
 
         [TestMethod]
-        public void doToJsonValidJsonStringReturnsObject()
+        public void ToJsonValidJsonStringReturnsObject()
         {
             var jsonString = @"
                 {
@@ -164,8 +164,8 @@ namespace biz.dfch.CS.Utilities.Tests.Convert
             var _string = JsonHelper.FromJson(jsonObject, "string", defaultValue);
             Assert.AreEqual("string", _string);
 
-            var _number = JsonHelper.FromJson(jsonObject, "number", defaultValue);
-            Assert.AreEqual("42", _number);
+            var number = JsonHelper.FromJson(jsonObject, "number", defaultValue);
+            Assert.AreEqual("42", number);
         }
 
         [TestMethod]
