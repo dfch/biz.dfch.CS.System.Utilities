@@ -15,12 +15,7 @@
  */
  
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-﻿using System.Text;
-using System.Threading.Tasks;
-﻿using biz.dfch.CS.Utilities.Attributes;
+ using biz.dfch.CS.Utilities.Attributes;
 
 namespace biz.dfch.CS.Utilities.Tests.Attributes
 {

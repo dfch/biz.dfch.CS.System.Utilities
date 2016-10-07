@@ -16,7 +16,7 @@
 
 using System;
 using biz.dfch.CS.Utilities.Security;
-using biz.dfch.CS.Utilities.Testing;
+using biz.dfch.CS.Testing.Attributes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace biz.dfch.CS.Utilities.Tests.Security

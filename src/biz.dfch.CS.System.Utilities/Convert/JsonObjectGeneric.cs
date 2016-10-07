@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-using System;
-using System.Linq;
-
 namespace biz.dfch.CS.Utilities.Convert
 {
     public class JsonObjectGeneric
