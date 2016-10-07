@@ -67,7 +67,7 @@ namespace biz.dfch.CS.Utilities.Tests.General
         {
             //Arrange
             // file number is hard coded - change it here in case you are changing the actual source code file
-            var exptectedLineNumber = 74;
+            var exptectedLineNumber = 73;
 
             //Act
             var result = Method.GetLineNumber();    // < -- this line must match the defined number in exptectedLineNumber
