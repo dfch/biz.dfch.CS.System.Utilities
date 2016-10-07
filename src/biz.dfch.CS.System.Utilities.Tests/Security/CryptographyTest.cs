@@ -1,5 +1,5 @@
 /**
- * Copyright 2014-2015 d-fens GmbH
+ * Copyright 2014-2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 using System;
 using biz.dfch.CS.Utilities.Security;
+using biz.dfch.CS.Testing.Attributes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace biz.dfch.CS.Utilities.Tests.Security
@@ -23,9 +24,10 @@ namespace biz.dfch.CS.Utilities.Tests.Security
     [TestClass]
     public class CryptographyTest
     {
+        private const string MASTER_PASSWORD = "MasterP@ssw0rd";
 
-        [TestCleanup()]
-        public void testCleanup()
+        [TestCleanup]
+        public void TestCleanup()
         {
             Cryptography.Password = null; ;
         }
@@ -41,7 +43,7 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         [ExpectedException(typeof(ArgumentNullException))]
         public void NewCryptographyEmptyThrowsArgumentNullException()
         {
-            new Cryptography(String.Empty);
+            new Cryptography(string.Empty);
         }
 
         [TestMethod]
@@ -54,110 +56,109 @@ namespace biz.dfch.CS.Utilities.Tests.Security
         [TestMethod]
         public void NewCryptographyReturnsObject()
         {
-            var MasterPassword = "myMasterPassword";
-            var cryptography = new Cryptography(MasterPassword);
+            var cryptography = new Cryptography(MASTER_PASSWORD);
             Assert.AreEqual(typeof(Cryptography), cryptography.GetType());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void EncryptNullPasswordThrowsArgumentNullException()
+        [ExpectContractFailure]
+        public void EncryptNullPasswordThrowsContractException()
         {
             Cryptography.Encrypt("Plaintext", null);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void EncryptEmptyPasswordThrowsArgumentNullException()
+        [ExpectContractFailure]
+        public void EncryptEmptyPasswordThrowsContractException()
         {
-            Cryptography.Encrypt("Plaintext", String.Empty);
+            Cryptography.Encrypt("Plaintext", string.Empty);
         }
 
         [TestMethod]
         public void EncryptWhitespacePasswordSucceeds()
         {
-            var Password = Cryptography.Encrypt("Plaintext", " ");
-            Assert.AreEqual("hX/ms5U/9cYKxmrgF0k7jg==", Password);
+            var password = Cryptography.Encrypt("Plaintext", " ");
+            Assert.AreEqual("hX/ms5U/9cYKxmrgF0k7jg==", password);
         }
 
         [TestMethod]
         public void EncryptMasterPasswordSucceeds()
         {
-            var Password = Cryptography.Encrypt("Plaintext", "MasterP@ssw0rd");
-            Assert.AreEqual("tFnA+Mj47qqW6Uk5336Y9g==", Password);
+            var password = Cryptography.Encrypt("Plaintext", MASTER_PASSWORD);
+            Assert.AreEqual("tFnA+Mj47qqW6Uk5336Y9g==", password);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void EncryptNullThrowsArgumentNullException()
         {
-            Cryptography.Encrypt(null, "MasterP@ssw0rd");
+            Cryptography.Encrypt(null, MASTER_PASSWORD);
         }
 
         [TestMethod]
         public void EncryptEmpty()
         {
-            var Password = Cryptography.Encrypt(String.Empty, "MasterP@ssw0rd");
-            Assert.AreEqual("Bt9avcuVQC2SliZ79DJUFw==", Password);
+            var password = Cryptography.Encrypt(string.Empty, MASTER_PASSWORD);
+            Assert.AreEqual("Bt9avcuVQC2SliZ79DJUFw==", password);
         }
 
         [TestMethod]
         public void EncryptViaConstructorSucceeds()
         {
-            var Plaintext = "myP@ssw0rd";
-            var cryptography = new Cryptography("MasterP@ssw0rd");
-            var Password = Cryptography.Encrypt(Plaintext);
-            Assert.AreEqual("X5eEcbMPLitplNgkYkDPpw==", Password);
+            const string plaintext = "myP@ssw0rd";
+            var cryptography = new Cryptography(MASTER_PASSWORD);
+            var password = Cryptography.Encrypt(plaintext);
+            Assert.AreEqual("X5eEcbMPLitplNgkYkDPpw==", password);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void DecryptNullPasswordThrowsArgumentNullException()
+        [ExpectContractFailure]
+        public void DecryptNullPasswordThrowsContractException()
         {
             Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", null);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void DecryptEmptyPasswordThrowsArgumentNullException()
+        [ExpectContractFailure]
+        public void DecryptEmptyPasswordThrowsContractException()
         {
-            Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", String.Empty);
+            Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", string.Empty);
         }
 
         [TestMethod]
         public void DecryptWhitespacePasswordSucceeds()
         {
-            var Plaintext = Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", " ");
-            Assert.AreEqual("Plaintext", Plaintext);
+            var plaintext = Cryptography.Decrypt("hX/ms5U/9cYKxmrgF0k7jg==", " ");
+            Assert.AreEqual("Plaintext", plaintext);
         }
 
         [TestMethod]
         public void DecryptMasterPasswordSucceeds()
         {
-            var Plaintext = Cryptography.Decrypt("tFnA+Mj47qqW6Uk5336Y9g==", "MasterP@ssw0rd");
-            Assert.AreEqual("Plaintext", Plaintext);
+            var plaintext = Cryptography.Decrypt("tFnA+Mj47qqW6Uk5336Y9g==", MASTER_PASSWORD);
+            Assert.AreEqual("Plaintext", plaintext);
         }
 
         [TestMethod]
         public void DecryptNullThrowsArgumentNullException()
         {
-            var Plaintext = Cryptography.Decrypt(null, "MasterP@ssw0rd");
-            Assert.IsNull(Plaintext);
+            var plaintext = Cryptography.Decrypt(null, MASTER_PASSWORD);
+            Assert.IsNull(plaintext);
         }
 
         [TestMethod]
         public void DecryptEmpty()
         {
-            var Plaintext = Cryptography.Decrypt(String.Empty, "MasterP@ssw0rd");
-            Assert.AreEqual("", Plaintext);
+            var plaintext = Cryptography.Decrypt(string.Empty, MASTER_PASSWORD);
+            Assert.AreEqual("", plaintext);
         }
 
         [TestMethod]
         public void DecryptViaConstructorSucceeds()
         {
-            var cryptography = new Cryptography("MasterP@ssw0rd");
-            var Plaintext = Cryptography.Decrypt("X5eEcbMPLitplNgkYkDPpw==");
-            Assert.AreEqual("myP@ssw0rd", Plaintext);
+            var cryptography = new Cryptography(MASTER_PASSWORD);
+            var plaintext = Cryptography.Decrypt("X5eEcbMPLitplNgkYkDPpw==");
+            Assert.AreEqual("myP@ssw0rd", plaintext);
         }
     }
 }

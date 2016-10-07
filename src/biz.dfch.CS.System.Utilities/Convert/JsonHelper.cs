@@ -1,5 +1,5 @@
 ﻿/**
- * Copyright 2014-2015 d-fens GmbH
+ * Copyright 2014-2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,10 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
 using biz.dfch.CS.Utilities.Logging;
 
 // http://stackoverflow.com/questions/3391936/using-webclient-for-json-serialization
@@ -30,21 +33,22 @@ namespace biz.dfch.CS.Utilities.Convert
             return JsonConvert.SerializeObject(instance);
         }
 
-        public static T ToJson<T>(String instance)
+        public static T ToJson<T>(string instance)
         {
             return JsonConvert.DeserializeObject<T>(instance);
         }
 
         // DFTODO - this method will probably never be called 
         // as the signature is the same as the next method
-        public static string ToJson(Object instance)
+        [Obsolete("Do not use this method.")]
+        public static string ToJson(object instance)
         {
             return JsonConvert.SerializeObject(instance);
         }
 
-        public static Dictionary<String, Object> ToJson(String instance)
+        public static Dictionary<string, object> ToJson(string instance)
         {
-            return JsonConvert.DeserializeObject<Dictionary<String, Object>>(instance);
+            return JsonConvert.DeserializeObject<Dictionary<string, object>>(instance);
         }
 
         public static JToken Parse(string instance)
@@ -62,17 +66,26 @@ namespace biz.dfch.CS.Utilities.Convert
             return JsonConvert.DeserializeObject<T>(json);
         }
 
-        public static string FromJson(Dictionary<String, Object> instance, string key, string defaultValue = "")
+        [Obsolete("Do not use this method.")]
+        public static string FromJson(Dictionary<string, object> instance, string key, string defaultValue = "")
         {
+            Contract.Ensures(null != Contract.Result<string>());
+
             string _return = defaultValue;
             try
             {
                 if (instance.ContainsKey(key))
                 {
-                    dynamic value = instance[key];
-                    if (value is Array && 0 <= value.Count)
+                    var value = instance[key];
+
+                    var collection = value as ICollection;
+                    if (null != collection && 0 < collection.Count)
                     {
-                        _return = value[0];
+                        foreach (var item in collection)
+                        {
+                            _return = item.ToString();
+                            break;
+                        }
                     }
                     else
                     {
@@ -82,19 +95,16 @@ namespace biz.dfch.CS.Utilities.Convert
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("FromJson: ERROR on instance with key '{0}'", key, "");
-                Debug.WriteException(key, ex);
+                Debug.WriteException(string.Format("FromJson: ERROR on instance with key '{0}'", key), ex);
                 _return = defaultValue;
-            }
-            if (null == _return)
-            {
-                throw new ArgumentException(String.Format("Key '{0}' not found.", key));
             }
             return _return;
         }
 
         public static string FromJson(JToken instance, string key, string defaultValue = "")
         {
+            Contract.Ensures(null != Contract.Result<string>());
+
             string _return = defaultValue;
             try
             {
@@ -108,7 +118,7 @@ namespace biz.dfch.CS.Utilities.Convert
                     var jArray = JToken.Parse(_return);
                     if (jArray is JArray)
                     {
-                        _return = jArray.ToObject<List<String>>()[0].ToString();
+                        _return = jArray.ToObject<List<string>>()[0].ToString();
                     }
                 }
                 catch
@@ -120,14 +130,10 @@ namespace biz.dfch.CS.Utilities.Convert
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("FromJson: ERROR on instance with key '{0}'", key, "");
-                Debug.WriteException(key, ex);
+                Debug.WriteException(string.Format("FromJson: ERROR on instance with key '{0}'", key), ex);
                 _return = defaultValue;
             }
-            if (null == _return)
-            {
-                throw new ArgumentException(String.Format("Key '{0}' not found.", key));
-            }
+
             return _return;
         }
 

@@ -1,5 +1,5 @@
 /**
- * Copyright 2014-2015 d-fens GmbH
+ * Copyright 2014-2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ namespace biz.dfch.CS.Utilities.Attributes
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static String GetStringValue(this Enum value)
+        public static string GetStringValue(this Enum value)
         {
             // Get the type
             Type type = value.GetType();

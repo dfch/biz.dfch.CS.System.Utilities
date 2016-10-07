@@ -1,5 +1,5 @@
 ﻿/**
- * Copyright 2014-2015 d-fens GmbH
+ * Copyright 2014-2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,20 +49,20 @@ namespace biz.dfch.CS.Utilities
         [StructLayout(LayoutKind.Sequential)]
         public struct STARTUPINFO
         {
-            public Int32 cb;
-            public String lpReserved;
-            public String lpDesktop;
-            public String lpTitle;
-            public Int32 dwX;
-            public Int32 dwY;
-            public Int32 dwXSize;
-            public Int32 dwYSize;
-            public Int32 dwXCountChars;
-            public Int32 dwYCountChars;
-            public Int32 dwFillAttribute;
-            public Int32 dwFlags;
-            public Int16 wShowWindow;
-            public Int16 cbReserved2;
+            public int cb;
+            public string lpReserved;
+            public string lpDesktop;
+            public string lpTitle;
+            public int dwX;
+            public int dwY;
+            public int dwXSize;
+            public int dwYSize;
+            public int dwXCountChars;
+            public int dwYCountChars;
+            public int dwFillAttribute;
+            public int dwFlags;
+            public short wShowWindow;
+            public short cbReserved2;
             public IntPtr lpReserved2;
             public IntPtr hStdInput;
             public IntPtr hStdOutput;
@@ -74,60 +74,58 @@ namespace biz.dfch.CS.Utilities
         {
             public IntPtr hProcess;
             public IntPtr hThread;
-            public Int32 dwProcessId;
-            public Int32 dwThreadId;
+            public int dwProcessId;
+            public int dwThreadId;
         }
 
         [DllImport("kernel32.dll")]
         static extern bool SetHandleInformation(IntPtr hObject, int dwMask, uint dwFlags);
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern bool CreatePipe(out IntPtr phReadPipe, out IntPtr phWritePipe, IntPtr lpPipeAttributes, UInt32 nSize);
+        static extern bool CreatePipe(out IntPtr phReadPipe, out IntPtr phWritePipe, IntPtr lpPipeAttributes, uint nSize);
 
         [DllImport("advapi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern Boolean CreateProcessWithLogonW
+        public static extern bool CreateProcessWithLogonW
         (
-            String lpszUsername,
-            String lpszDomain,
-            String lpszPassword,
-            Int32 dwLogonFlags,
-            String applicationName,
-            String commandLine,
-            Int32 creationFlags,
+            string lpszUsername,
+            string lpszDomain,
+            string lpszPassword,
+            int dwLogonFlags,
+            string applicationName,
+            string commandLine,
+            int creationFlags,
             IntPtr environment,
-            String currentDirectory,
+            string currentDirectory,
             ref STARTUPINFO sui,
             out PROCESS_INFORMATION processInfo
         );
 
         [DllImport("kernel32", SetLastError = true)]
-        public static extern Boolean CloseHandle(IntPtr handle);
+        public static extern bool CloseHandle(IntPtr handle);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool GetExitCodeProcess(IntPtr hProcess, out uint ExitCode);
 
         public static Dictionary<string, string> OutputParameter = new Dictionary<string, string>();
 
-        private static object readStandardOutputThreadCompleted = false;
+        private static object _readStandardOutputThreadCompleted = false;
         private static void ReadStandardOutputThread(object data)
         {
-            lock (readStandardOutputThreadCompleted)
+            lock (_readStandardOutputThreadCompleted)
             {
-                IntPtr handle = (IntPtr)data;
+                var handle = (IntPtr)data;
 
-                byte[] buffer = new byte[1];
-                int bytesRead;
+                var buffer = new byte[1];
                 var sb = new StringBuilder();
 
-                dynamic consoleEncoding;
-                consoleEncoding = new ASCIIEncoding();
+                var consoleEncoding = new ASCIIEncoding();
                 var readerStdout = new FileReader(handle);
                 sb.Clear();
-                bytesRead = 0;
+                var bytesRead = 0;
                 do
                 {
                     bytesRead = readerStdout.Read(buffer, 0, buffer.Length);
-                    string content = consoleEncoding.GetString(buffer, 0, bytesRead);
+                    var content = consoleEncoding.GetString(buffer, 0, bytesRead);
                     sb.Append(content);
                 }
                 while (bytesRead > 0);
@@ -136,7 +134,7 @@ namespace biz.dfch.CS.Utilities
                 {
                     OutputParameter[ResultDictionaryNameEnum.STDOUT.ToString()] = sb.ToString();
                 }
-                readStandardOutputThreadCompleted = true;
+                _readStandardOutputThreadCompleted = true;
                 return;
             }
         }
@@ -164,7 +162,7 @@ namespace biz.dfch.CS.Utilities
 
             var saAttr = new SECURITY_ATTRIBUTES();
             // check http://msdn.microsoft.com/en-us/library/windows/desktop/ms682499%28v=vs.85%29.aspx
-            IntPtr pSaAttr = IntPtr.Zero;
+            var pSaAttr = IntPtr.Zero;
 
             var processInfo = new PROCESS_INFORMATION();
             var startInfo = new STARTUPINFO();
@@ -198,7 +196,7 @@ namespace biz.dfch.CS.Utilities
                 startInfo.hStdOutput = hConsoleOutputWrite;
                 startInfo.dwFlags = 0x00000100; // STARTF_USESTDHANDLES
 
-                Debug.WriteLine(string.Format("SystemUtilities.Process.StartProcess: '{0}' in '{1}' [as '{2}\\{3}] ...", commandLine, workingDirectory, domain, username));
+                Debug.WriteLine("SystemUtilities.Process.StartProcess: '{0}' in '{1}' [as '{2}\\{3}] ...", commandLine, workingDirectory, domain, username);
                 // Create process
                 fReturn = CreateProcessWithLogonW(
                     username,
@@ -225,19 +223,17 @@ namespace biz.dfch.CS.Utilities
                 CloseHandle(hConsoleInputWrite);
                 hConsoleInputWrite = IntPtr.Zero;
 
-                byte[] buffer = new byte[1];
-                int bytesRead;
+                var buffer = new byte[1];
                 var sb = new StringBuilder();
 
-                dynamic consoleEncoding;
-                consoleEncoding = new ASCIIEncoding();
+                var consoleEncoding = new ASCIIEncoding();
 
-                Thread threadOutput = new Thread(Process.ReadStandardOutputThread);
+                var threadOutput = new Thread(Process.ReadStandardOutputThread);
                 threadOutput.Start(hConsoleOutputRead);
 
                 var readerStderr = new FileReader(hConsoleErrorRead);
                 sb.Clear();
-                bytesRead = 0;
+                var bytesRead = 0;
                 do
                 {
                     bytesRead = readerStderr.Read(buffer, 0, buffer.Length);
@@ -251,26 +247,12 @@ namespace biz.dfch.CS.Utilities
                     OutputParameter["STDERR"] = sb.ToString();
                 }
 
-                lock (readStandardOutputThreadCompleted)
+                lock (_readStandardOutputThreadCompleted)
                 {
-                    Debug.WriteLine("ReadStandardOutputThreadCompleted '{0}'", readStandardOutputThreadCompleted);
+                    Debug.WriteLine("ReadStandardOutputThreadCompleted '{0}'", _readStandardOutputThreadCompleted);
                 }
 
-                // This read is no longer used here but implemented in a separate thread
-                //var readerStdout = new FileReader(hConsoleOutputRead);
-                //sb.Clear();
-                //bytesRead = 0;
-                //do
-                //{
-                //    bytesRead = readerStdout.Read(buffer, 0, buffer.Length);
-                //    string content = ConsoleEncoding.GetString(buffer, 0, bytesRead);
-                //    sb.Append(content);
-                //}
-                //while (bytesRead > 0);
-                //readerStdout.Close();
-                //OutputParameter[ResultDictionaryNameEnum.STDOUT.ToString()] = sb.ToString();
-
-                UInt32 processExitCode = UInt32.MaxValue;
+                var processExitCode = uint.MaxValue;
                 fReturn = GetExitCodeProcess(processInfo.hProcess, out processExitCode);
                 lock (OutputParameter)
                 {

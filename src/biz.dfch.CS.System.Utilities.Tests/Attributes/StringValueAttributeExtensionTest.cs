@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 d-fens GmbH
+ * Copyright 2015-2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,7 @@
  */
  
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-﻿using System.Text;
-using System.Threading.Tasks;
-﻿using biz.dfch.CS.Utilities.Attributes;
+ using biz.dfch.CS.Utilities.Attributes;
 
 namespace biz.dfch.CS.Utilities.Tests.Attributes
 {

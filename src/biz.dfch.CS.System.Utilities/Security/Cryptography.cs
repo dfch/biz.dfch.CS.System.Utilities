@@ -1,5 +1,5 @@
 /**
- * Copyright 2014-2015 d-fens GmbH
+ * Copyright 2014-2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,122 +16,135 @@
 
 using System;
 using System.Configuration;
+using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 
-[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("biz.dfch.CS.System.Utilities.Tests")]
+[assembly: InternalsVisibleTo("biz.dfch.CS.System.Utilities.Tests")]
 namespace biz.dfch.CS.Utilities.Security
 {
     public class Cryptography
     {
-        private const string _AppSettingsPassword = "Cryptograhpy.Password";
-        private static string _Password;
+        private const string APP_SETTINGS_PASSWORD = "Cryptograhpy.Password";
+        private static string _password;
+        private static readonly object _lock = new object();
+
+        private static readonly UTF8Encoding _utf8 = new UTF8Encoding();
 
         internal static string Password
         {
-            get { return Cryptography._Password; }
-            set { Cryptography._Password = value; }
+            get { return _password; }
+            set { _password = value; }
         }
 
-        internal Cryptography(String Password)
+        internal Cryptography(string password)
         {
-            if (String.IsNullOrEmpty(Password))
+            if (string.IsNullOrEmpty(password))
             {
-                throw new ArgumentNullException(String.Format("No or empty password specified."));
+                throw new ArgumentNullException("password", "No or empty password specified.");
             }
-            _Password = Password;
+            _password = password;
         }
 
-        public static string Encrypt(string Data, string Password = null)
+        private static string GetPassword()
         {
-            if (string.IsNullOrEmpty(Password))
+            string result;
+
+            if (string.IsNullOrEmpty(_password))
             {
-                if (String.IsNullOrEmpty(_Password))
+                lock (_lock)
                 {
-                    _Password = ConfigurationManager.AppSettings[_AppSettingsPassword];
-                    Password = _Password;
-                    if (string.IsNullOrEmpty(Password))
+                    if (string.IsNullOrEmpty(_password))
                     {
-                        throw new ArgumentNullException(String.Format("{0}: no password in configuration found or no password specified.", _AppSettingsPassword));
+                        _password = ConfigurationManager.AppSettings[APP_SETTINGS_PASSWORD];
                     }
-                }
-                else
-                {
-                    Password = _Password;
+                    result = _password;
                 }
             }
-            string Result;
-            byte[] abResult;
-            UTF8Encoding UTF8 = new UTF8Encoding();
-            var HashProvider = new SHA256CryptoServiceProvider();
-            byte[] Key = HashProvider.ComputeHash(UTF8.GetBytes(Password));
-            var Algorithm = new AesCryptoServiceProvider();
+            else
+            {
+                result = _password;
+            }
+
+            return result;
+        }
+
+        public static string Encrypt(string data, string password = null)
+        {
+            if (string.IsNullOrEmpty(password))
+            {
+                password = GetPassword();
+                Contract.Assert(!string.IsNullOrEmpty(password), "No password in AppSettings found or no password specified");
+            }
+            
+            var hashProvider = new SHA256CryptoServiceProvider();
+            var algorithm = new AesManaged
+            {
+                Key = hashProvider.ComputeHash(_utf8.GetBytes(password)),
+                Mode = CipherMode.ECB,
+                Padding = PaddingMode.PKCS7
+            };
+
+            string result;
             try
             {
-                Algorithm.Key = Key;
-                Algorithm.Mode = CipherMode.ECB;
-                Algorithm.Padding = PaddingMode.PKCS7;
-                byte[] abData = UTF8.GetBytes(Data);
-                using (ICryptoTransform Encryptor = Algorithm.CreateEncryptor())
+                var abData = _utf8.GetBytes(data);
+                using (var encryptor = algorithm.CreateEncryptor())
                 {
-                    abResult = Encryptor.TransformFinalBlock(abData, 0, abData.Length);
-                    Result = System.Convert.ToBase64String(abResult);
+                    var abResult = encryptor.TransformFinalBlock(abData, 0, abData.Length);
+                    result = System.Convert.ToBase64String(abResult);
                 }
             }
             finally
             {
-                Algorithm.Clear();
-                HashProvider.Clear();
+                algorithm.Clear();
+                algorithm.Dispose();
+
+                hashProvider.Clear();
+                hashProvider.Dispose();
             }
-            return Result;
+            return result;
         }
 
-        public static string Decrypt(string EncryptedData, string Password = null)
+        public static string Decrypt(string encryptedData, string password = null)
         {
-            if (string.IsNullOrEmpty(Password))
+            if (string.IsNullOrEmpty(password))
             {
-                if (String.IsNullOrEmpty(_Password))
-                {
-                    _Password = ConfigurationManager.AppSettings[_AppSettingsPassword];
-                    Password = _Password;
-                    if (string.IsNullOrEmpty(Password))
-                    {
-                        throw new ArgumentNullException(String.Format("{0}: no password in configuration found or no password specified.", _AppSettingsPassword));
-                    }
-                }
-                else
-                {
-                    Password = _Password;
-                }
+                password = GetPassword();
+                Contract.Assert(!string.IsNullOrEmpty(password), "No password in AppSettings found or no password specified");
             }
-            string Result;
-            byte[] abResult;
-            UTF8Encoding UTF8 = new UTF8Encoding();
-            var HashProvider = new SHA256CryptoServiceProvider();
-            byte[] Key = HashProvider.ComputeHash(UTF8.GetBytes(Password));
-            var Algorithm = new AesCryptoServiceProvider();
+
+            var hashProvider = new SHA256CryptoServiceProvider();
+            var algorithm = new AesCryptoServiceProvider
+            {
+                Key = hashProvider.ComputeHash(_utf8.GetBytes(password)),
+                Mode = CipherMode.ECB,
+                Padding = PaddingMode.PKCS7
+            };
+
+            string result;
             try
             {
-                Algorithm.Key = Key;
-                Algorithm.Mode = CipherMode.ECB;
-                Algorithm.Padding = PaddingMode.PKCS7;
-                byte[] abEncryptedData = System.Convert.FromBase64String(EncryptedData);
-                using (ICryptoTransform Decryptor = Algorithm.CreateDecryptor())
+                var abEncryptedData = System.Convert.FromBase64String(encryptedData);
+                using (var decryptor = algorithm.CreateDecryptor())
                 {
-                    abResult = Decryptor.TransformFinalBlock(abEncryptedData, 0, abEncryptedData.Length);
-                    Result = UTF8.GetString(abResult);
+                    var abResult = decryptor.TransformFinalBlock(abEncryptedData, 0, abEncryptedData.Length);
+                    result = _utf8.GetString(abResult);
                 }
             }
-            catch
+            catch (Exception)
             {
-                Result = EncryptedData;
+                result = encryptedData;
             }
             finally
             {
-                Algorithm.Clear();
-                HashProvider.Clear();
+                algorithm.Clear();
+                algorithm.Dispose();
+                hashProvider.Clear();
+                hashProvider.Dispose();
             }
-            return Result;
+            return result;
         }
     }
 }

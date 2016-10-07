@@ -1,5 +1,5 @@
 /**
- * Copyright 2014-2015 d-fens GmbH
+ * Copyright 2014-2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,13 +27,26 @@ namespace biz.dfch.CS.Utilities
         /// <summary>
         /// Parses the provided value to the desired enum type (defined by T).
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="value"></param>
-        /// <param name="ignoreCase"></param>
-        /// <returns></returns>
-        public static T Parse<T>(String value, Boolean ignoreCase = true)
+        /// <typeparam name="T">Enum type to parse value into</typeparam>
+        /// <param name="value">Enum string value</param>
+        /// <param name="ignoreCase">Ignores case of specified value</param>
+        /// <returns>T (enum value)</returns>
+        public static T Parse<T>(string value, bool ignoreCase)
+            where T : struct, IConvertible
         {
-            return (T)Enum.Parse(typeof(T), value, ignoreCase);
+            return (T) Enum.Parse(typeof(T), value, ignoreCase);
+        }
+
+        /// <summary>
+        /// Parses the provided value to the desired enum type (defined by T).
+        /// </summary>
+        /// <typeparam name="T">Enum type to parse value into</typeparam>
+        /// <param name="value">Enum string value</param>
+        /// <returns>T (enum value)</returns>
+        public static T Parse<T>(string value)
+            where T : struct, IConvertible
+        {
+            return Parse<T>(value, true);
         }
     }
 }

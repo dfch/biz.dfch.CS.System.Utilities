@@ -1,5 +1,5 @@
 ﻿/**
- * Copyright 2014-2015 d-fens GmbH
+ * Copyright 2014-2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using biz.dfch.CS.Utilities.General;
 
@@ -68,7 +67,7 @@ namespace biz.dfch.CS.Utilities.Tests.General
         {
             //Arrange
             // file number is hard coded - change it here in case you are changing the actual source code file
-            var exptectedLineNumber = 74;
+            var exptectedLineNumber = 73;
 
             //Act
             var result = Method.GetLineNumber();    // < -- this line must match the defined number in exptectedLineNumber

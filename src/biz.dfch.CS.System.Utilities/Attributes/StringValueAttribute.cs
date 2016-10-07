@@ -1,5 +1,5 @@
 /**
- * Copyright 2014-2015 d-fens GmbH
+ * Copyright 2014-2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ namespace biz.dfch.CS.Utilities.Attributes
         /// <summary>
         /// Holds the stringvalue for a value in an enum.
         /// </summary>
-        public String StringValue { get; protected set; }
+        public string StringValue { get; protected set; }
 
         #endregion
 
@@ -41,7 +41,7 @@ namespace biz.dfch.CS.Utilities.Attributes
         /// Constructor used to init a StringValue Attribute
         /// </summary>
         /// <param name="value"></param>
-        public StringValueAttribute(String value)
+        public StringValueAttribute(string value)
         {
             this.StringValue = value;
         }
