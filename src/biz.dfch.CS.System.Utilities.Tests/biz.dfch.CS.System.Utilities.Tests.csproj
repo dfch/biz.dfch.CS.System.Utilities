@@ -80,6 +80,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>biz.dfch.CS.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="biz.dfch.CS.Testing, Version=1.1.0.11403, Culture=neutral, PublicKeyToken=30acc2f3d5961f2d, processorArchitecture=MSIL">
       <HintPath>..\packages\biz.dfch.CS.Testing.1.1.0\lib\biz.dfch.CS.Testing.dll</HintPath>
@@ -124,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="biz.dfch.CS.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
