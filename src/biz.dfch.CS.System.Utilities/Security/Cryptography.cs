@@ -17,11 +17,9 @@
 using System;
 using System.Configuration;
 using System.Diagnostics.Contracts;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 
-[assembly: InternalsVisibleTo("biz.dfch.CS.System.Utilities.Tests")]
 namespace biz.dfch.CS.Utilities.Security
 {
     public class Cryptography

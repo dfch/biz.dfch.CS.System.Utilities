@@ -26,7 +26,7 @@ using biz.dfch.CS.Utilities.Logging;
 // http://stackoverflow.com/questions/3391936/using-webclient-for-json-serialization
 namespace biz.dfch.CS.Utilities.Convert
 {
-    class JsonHelper
+    public class JsonHelper
     {
         public static string ToJson<T>(T instance)
         {

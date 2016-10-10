@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.System.Utilities</id>
-        <version>3.0.1</version>
+        <version>3.1.0</version>
         <title>biz.dfch.CS.System.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -24,9 +24,8 @@ Collection of utility classes that provide functionalities like
 * Introspection and Reflection for calling methods
 		</description>
         <summary>Collection of utility classes</summary>
-        <releaseNotes>20161007
-* moved ExpectContractFailure to biz.dfch.CS.Testing module
-* added code contracts assembly
+        <releaseNotes>20161010
+* added strong name to assembly
 </releaseNotes>
         <copyright>Copyright © 2014 - 2016 d-fens GmbH</copyright>
         <tags>dfch utilities C#</tags>
